@@ -1,21 +1,106 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static Entropy.Commands;
+
 
 namespace Entropy
 {
     class Functions
     {
-        public static void HelpFunction(string? argument, string? argument2)
+        public static void HelpFunction(string _, string __)
         {
             foreach (var (key, value) in Commands._commandsDsc)
             {
-                Console.WriteLine($">>$>>: {key} - {value}");
+                Console.WriteLine($"{key} - {value}");
             }
 
+        }
+
+        public static void ClearFunction(string _, string __)
+        {
+            Console.Clear();
+            Utilities.EntropyScreen();
+        }
+
+        public static void StatusFunction(string _, string __)
+        {
+            Console.ForegroundColor = ConsoleColor.DarkMagenta;
+            Console.WriteLine("pID:::pName:::status");
+            Console.ResetColor();
+
+            var status = Process.GetProcesses();
+
+            foreach (var process in status)
+            {
+                var isSuspended = false;
+
+                foreach (ProcessThread thread in process.Threads)
+                {
+                    if (thread.ThreadState == System.Diagnostics.ThreadState.Wait &&
+                        thread.WaitReason == ThreadWaitReason.Suspended)
+                    {
+                        isSuspended = true;
+                        break;
+                    }
+                }
+
+                if (isSuspended)
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine($"{process.Id}:::{process.ProcessName}:::Suspended");
+                    Console.ResetColor();
+                }
+                else
+                {
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine($"{process.Id}:::{process.ProcessName}:::Working");
+                    Console.ResetColor();
+                }
+            }
+            Console.Write("\n");
+        }
+
+        public static void TerminateFunction(string argument, string _)
+        {
+            if (argument != null)
+            {
+                bool isFinded = false;
+                foreach (var process in Process.GetProcesses())
+                {
+                    try
+                    {
+                        if (process.Id.ToString() == argument)
+                        {
+                            process.Kill();
+                            Utilities.EntropyWrite(ConsoleColor.Green, $"{process.Id}:::{process.ProcessName} was succesfully terminated.");
+                            isFinded = true;
+                        }
+                        if (process.ProcessName == argument)
+                        {
+                            process.Kill();
+                            Utilities.EntropyWrite(ConsoleColor.Green, $"{process.Id}:::{process.ProcessName} was succesfully terminated.");
+                            isFinded = true;
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Utilities.EntropyWrite(ConsoleColor.Red, $"Failed to kill process >>> {ex.Message}.");
+                        isFinded = true;
+                    }
+                }
+                if (isFinded == false)
+                {
+                    Utilities.EntropyWrite(ConsoleColor.Red, $"{argument} not found.");
+                }
+                Console.Write("\n");
+            }
+            else
+            {
+                Console.WriteLine("You didn't pass an argument, use the `terminate` command like this: `terminate <process.name>` or `terminate <process.pid>'\n");
+            }
         }
     }
 }
