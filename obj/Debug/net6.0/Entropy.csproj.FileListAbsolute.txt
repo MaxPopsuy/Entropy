@@ -1,0 +1,14 @@
+C:\Users\Expert PC\Desktop\projects\Entropy\obj\Debug\net6.0\Entropy.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Expert PC\Desktop\projects\Entropy\obj\Debug\net6.0\Entropy.AssemblyInfoInputs.cache
+C:\Users\Expert PC\Desktop\projects\Entropy\obj\Debug\net6.0\Entropy.AssemblyInfo.cs
+C:\Users\Expert PC\Desktop\projects\Entropy\obj\Debug\net6.0\Entropy.csproj.CoreCompileInputs.cache
+C:\Users\Expert PC\Desktop\projects\Entropy\bin\Debug\net6.0\Entropy.exe
+C:\Users\Expert PC\Desktop\projects\Entropy\bin\Debug\net6.0\Entropy.deps.json
+C:\Users\Expert PC\Desktop\projects\Entropy\bin\Debug\net6.0\Entropy.runtimeconfig.json
+C:\Users\Expert PC\Desktop\projects\Entropy\bin\Debug\net6.0\Entropy.dll
+C:\Users\Expert PC\Desktop\projects\Entropy\bin\Debug\net6.0\Entropy.pdb
+C:\Users\Expert PC\Desktop\projects\Entropy\obj\Debug\net6.0\Entropy.dll
+C:\Users\Expert PC\Desktop\projects\Entropy\obj\Debug\net6.0\refint\Entropy.dll
+C:\Users\Expert PC\Desktop\projects\Entropy\obj\Debug\net6.0\Entropy.pdb
+C:\Users\Expert PC\Desktop\projects\Entropy\obj\Debug\net6.0\Entropy.genruntimeconfig.cache
+C:\Users\Expert PC\Desktop\projects\Entropy\obj\Debug\net6.0\ref\Entropy.dll
