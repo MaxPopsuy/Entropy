@@ -14,7 +14,7 @@ namespace Entropy
         {
             foreach (var (key, value) in Commands._commandsDsc)
             {
-                Console.WriteLine($"{key} - {value}");
+                Console.WriteLine($"{key} {value[0]} - {value[1]}");
             }
 
         }
