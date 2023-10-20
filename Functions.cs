@@ -14,9 +14,17 @@ namespace Entropy
         {
             foreach (var (key, value) in Commands._commandsDsc)
             {
-                Console.WriteLine($"{key} {value[0]} - {value[1]}");
+                //Utilities.EntropyWrite(ConsoleColor.DarkMagenta, $"{key} {value[0]} - {value[1]}");
+                Console.WriteLine("");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.Write($"{key}");
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.Write($" {value[0]}");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.Write($" - {value[1]}");
+                Console.ResetColor();   
             }
-
+            Console.WriteLine("\n");
         }
 
         public static void ClearFunction(string _, string __)
@@ -27,8 +35,8 @@ namespace Entropy
 
         public static void StatusFunction(string _, string __)
         {
-            Console.ForegroundColor = ConsoleColor.DarkMagenta;
-            Console.WriteLine("pID:::pName:::status");
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine("pID:::pName:::status \n");
             Console.ResetColor();
 
             var status = Process.GetProcesses();
