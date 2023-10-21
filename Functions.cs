@@ -161,5 +161,33 @@ namespace Entropy
             }
             /*Console.WriteLine("\n");*/
         }
+
+        public static void GetPathFunction(string argument, string _)
+        {
+            var processes = Process.GetProcesses();
+
+            foreach (var process in processes)
+            {
+                if(process.ProcessName == argument || process.Id.ToString() == argument)
+                {
+                    try
+                    {
+                        if (process != null && process.MainModule != null)
+                        {
+                            Utilities.EntropyWrite(ConsoleColor.Green, $"{process.Id}:::{process.ProcessName} > {process.MainModule.FileName}");
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Utilities.EntropyWrite(ConsoleColor.Red, $"Failed to access path for process: {process.Id}:::{process.ProcessName} >> {ex.Message}");
+                    }
+                }
+            }
+        }
+
+        public static void SuspendFunction(string argument, string _)
+        {
+            
+        }
     }
 }

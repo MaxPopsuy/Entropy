@@ -16,7 +16,8 @@ namespace Entropy
             ["clear"] = ["", "clears console. (aliases: clr, cls)"],
             ["status"] = ["", "shows processes list. (aliases: ps, pl)"],
             ["terminate"] = ["<process.id> or <process.name>", "Terminates process by its name or id. (aliases: kill, kl, term)"],
-            ["find"] = ["<process.id> or <process.name>", "Finds a process with specific name or id and returns its status"]
+            ["find"] = ["<process.id> or <process.name>", "Finds the process with specific name or id and returns its status"],
+            ["getpath"] = ["<process.id> or <process.name>", "Gets the process path from id or name (aliases: gp)"]
         };
 
         public static Dictionary<string, string[]> _commandsAliases = new()
@@ -25,7 +26,8 @@ namespace Entropy
             ["clear"] = ["clr", "cls", "clear"],
             ["status"] = ["ps", "pl", "status"],
             ["terminate"] = ["kill", "terminate", "kl", "term"],
-            ["find"] = ["find"]
+            ["find"] = ["find"],
+            ["getpath"] = ["getpath", "gp"]
         };
 
 
@@ -36,6 +38,7 @@ namespace Entropy
             ["status"] = StatusFunction,
             ["terminate"] = TerminateFunction,
             ["find"] = FindFunction,
+            ["getpath"] = GetPathFunction,
         };
     }
 
