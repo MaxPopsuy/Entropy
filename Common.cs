@@ -13,7 +13,7 @@ namespace Entropy
         public static Dictionary<string, string[]> _commandsDsc = new() // string[] = ["arguments", "description"]
         {
             ["help"] = ["", "shows every command and short description of them"],
-            ["clear"] = ["", "clears console. (aliases: clr, cls)"],
+            ["clear"] = ["", $"clears console. (aliases: clr, cls)"],
             ["status"] = ["", "shows processes list. (aliases: ps, pl)"],
             ["terminate"] = ["<process.id> or <process.name>", "Terminates process by its name or id. (aliases: kill, kl, term)"],
             ["find"] = ["<process.id> or <process.name>", "Finds the process with specific name or id and returns its status"],
@@ -22,12 +22,12 @@ namespace Entropy
 
         public static Dictionary<string, string[]> _commandsAliases = new()
         {
-            ["help"] = ["h", "help", "g"],
-            ["clear"] = ["clr", "cls", "clear"],
-            ["status"] = ["ps", "pl", "status"],
-            ["terminate"] = ["kill", "terminate", "kl", "term"],
-            ["find"] = ["find"],
-            ["getpath"] = ["getpath", "gp"]
+            ["help"] = ["h", "g"],
+            ["clear"] = ["clr", "cls"],
+            ["status"] = ["ps", "pl"],
+            ["terminate"] = ["kill", "kl", "term"],
+            ["find"] = [],
+            ["getpath"] = [ "gp"]
         };
 
 
