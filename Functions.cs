@@ -113,7 +113,13 @@ namespace Entropy
 
         public static void FindFunction(string argument, string _)
         {
+            if (string.IsNullOrEmpty(argument))
+            {
+                Utilities.EntropyWrite(ConsoleColor.Red, "Please provide an argument, either the process id or the process name \n");
+                return;
+            }
             var processes = Process.GetProcesses();
+            var procArray = new List<int>();
 
             foreach (var process in processes)
             {
@@ -135,6 +141,7 @@ namespace Entropy
                     int id;
                     if (int.TryParse(argument, out id) && process.Id == id || process.ProcessName == argument)
                     {
+                        procArray.Add(id);
                         Utilities.EntropyWrite(ConsoleColor.Red, $"{process.Id}:::{process.ProcessName}:::Suspended");
                     }
                 }
@@ -143,11 +150,16 @@ namespace Entropy
                     int id;
                     if (int.TryParse(argument, out id) && process.Id == id || process.ProcessName == argument)
                     {
+                        procArray.Add(id);
                         Utilities.EntropyWrite(ConsoleColor.Green, $"{process.Id}:::{process.ProcessName}:::Working");
                     }
                 }
             }
-            Utilities.EntropyWrite(ConsoleColor.Red, "No processes with this specific id or name were found \n");
+            if (procArray.Count == 0)
+            {
+                Utilities.EntropyWrite(ConsoleColor.Red, $"No processes with this specific id or name were found");
+            }
+            /*Console.WriteLine("\n");*/
         }
     }
 }
