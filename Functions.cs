@@ -22,7 +22,7 @@ namespace Entropy
                 Console.Write($" {value[0]}");
                 Console.ForegroundColor = ConsoleColor.White;
                 Console.Write($" - {value[1]}");
-                Console.ResetColor();   
+                Console.ResetColor();
             }
             Console.WriteLine("\n");
         }
@@ -109,6 +109,45 @@ namespace Entropy
             {
                 Console.WriteLine("You didn't pass an argument, use the `terminate` command like this: `terminate <process.name>` or `terminate <process.pid>'\n");
             }
+        }
+
+        public static void FindFunction(string argument, string _)
+        {
+            var processes = Process.GetProcesses();
+
+            foreach (var process in processes)
+            {
+                var isSuspended = false;
+
+
+                foreach (ProcessThread thread in process.Threads)
+                {
+                    if (thread.ThreadState == System.Diagnostics.ThreadState.Wait &&
+                        thread.WaitReason == ThreadWaitReason.Suspended)
+                    {
+                        isSuspended = true;
+                        break;
+                    }
+                }
+
+                if (isSuspended)
+                {
+                    int id;
+                    if (int.TryParse(argument, out id) && process.Id == id || process.ProcessName == argument)
+                    {
+                        Utilities.EntropyWrite(ConsoleColor.Red, $"{process.Id}:::{process.ProcessName}:::Suspended");
+                    }
+                }
+                else
+                {
+                    int id;
+                    if (int.TryParse(argument, out id) && process.Id == id || process.ProcessName == argument)
+                    {
+                        Utilities.EntropyWrite(ConsoleColor.Green, $"{process.Id}:::{process.ProcessName}:::Working");
+                    }
+                }
+            }
+            Utilities.EntropyWrite(ConsoleColor.Red, "No processes with this specific id or name were found \n");
         }
     }
 }
