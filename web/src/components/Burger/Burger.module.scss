@@ -1,0 +1,33 @@
+@import "@styles/variables.scss";
+
+.burger {
+  max-width: 100px;
+  z-index: 1;
+  &__button {
+    background-color: $black;
+    width: 50px;
+    border: none;
+    outline: none;
+    transition: 0.2s all ease-in-out;
+
+    &:hover {
+      background-color: $primary-gray;
+      // outline: 1px solid $primary-pink;
+    }
+  }
+
+  &__container {
+    // display: none;
+    opacity: 0;
+    visibility: none;
+    pointer-events: none;
+    transition: 0.3s ease-in-out;
+
+    &--active {
+      // display: block;
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+    }
+  }
+}

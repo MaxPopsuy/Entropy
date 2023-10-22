@@ -1,0 +1,65 @@
+@import "@styles/variables.scss";
+@import "@styles/declarations.scss";
+
+@keyframes gradient {
+  to {
+    background-position: 200% center;
+  }
+}
+
+.page {
+  width: 100vw;
+  // min-height: clamp(250px, 700px, 1000px);
+
+  &__container {
+    // max-width: 320px;
+  }
+  // display: flex;
+  // justify-content: center;
+  // align-items: center;
+
+  position: relative;
+
+  &__title {
+    font-family: "Cubano", "VoidBold", "Poppins", "Nunito", Arial, Helvetica,
+      sans-serif;
+    font-size: clamp(5rem, 2.5rem + 15vw, 10rem);
+    margin: 0;
+    background: linear-gradient(120deg, $primary-pink 0%, $primary-purple 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background: linear-gradient(
+      to right,
+      $primary-pink,
+      $black,
+      $main-purple,
+      $black,
+      $primary-purple
+    );
+    text-align: center;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-size: 200% auto;
+
+    animation: gradient 7s linear infinite;
+  }
+  &__info {
+    font-size: 26px;
+    font-family: "VoidBold", "Poppins", "Nunito", Arial, Helvetica,
+      sans-serif;
+    color: $main-gray;
+    padding: 15px;
+    min-width: 200px;
+    max-width: 500px;
+    margin: 0 auto;
+    text-align: center;
+    // text-overflow: overf;
+  }
+
+  &__image {
+    position: absolute;
+    display: none;
+  }
+}

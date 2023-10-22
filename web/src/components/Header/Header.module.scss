@@ -1,0 +1,14 @@
+@import "@styles/variables.scss";
+
+.header {
+  max-width: 100vw;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 15px;
+
+  &__logo {
+    font-family: "Cubano";
+    font-size: 3rem;
+    color: $white;
+  }
+}

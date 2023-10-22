@@ -1,0 +1,28 @@
+@import "@styles/variables.scss";
+
+.navbar {
+  width: clamp(70px, 70px + 25vw, 100%);
+  max-width: 100%;
+  min-height: 25vh;
+  position: absolute;
+  right: 0;
+  top: clamp(65px, 0.5rem + 65px, 100px);
+
+  background-color: #222;
+  border: 2px solid $primary-pink;
+  border-radius: 25px 10px 10px 25px;
+
+  padding: 25px;
+  z-index: 100;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  &__link {
+    font-size: 24px;
+    font-family: $boldText;
+    color: $white;
+    text-transform: capitalize;
+  }
+}

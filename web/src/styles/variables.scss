@@ -1,0 +1,28 @@
+@import "./declarations.scss";
+
+$primary-black: #191825;
+$secondary-black: #413543;
+$primary-purple: #b931fc;
+$primary-pink: #c147e9;
+$secondary-pink: #e5b8f4;
+$main-black: #222831;
+$black: #272829;
+$secondary-black: #393e46;
+$primary-gray: #454545;
+$secondary-gray: #45474B;
+$main-gray: #B9B4C7;
+$main-blue: #00adb5;
+$main-red: #ff2e63;
+$primary-red: #ff0032;
+$dark-purple: #2d033b;
+$main-purple: #6c4ab6;
+$grey-purple: #453c67;
+$white: #f6f6f6;
+$secondary-white: #fdf6f0;
+
+// fonts
+
+$titleFont: "Cubano", "VoidBold", "Poppins", "Nunito", Arial, Helvetica,
+  sans-serif;
+$textFont: "VoidRegular", "Poppins", "Nunito", Arial, Helvetica, sans-serif;
+$boldText: "VoidBold", "Poppins", "Nunito", Arial, Helvetica, sans-serif;
