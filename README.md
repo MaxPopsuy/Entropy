@@ -1,8 +1,8 @@
 # Entropy - your all-in-one terminal task manager
 
-![Current version: beta 0.0.0](https://img.shields.io/badge/ver-beta%200.0.0-purple?style=for-the-badge)
-![Date created: 20.10.23](https://img.shields.io/badge/date%20created-20.10.23-purple?style=for-the-badge)
-
+![Current version: beta 0.0.0](https://img.shields.io/badge/ver-beta%200.0.0-purple?style=for-the-badge&labelColor=222)
+![Date created: 20.10.23](https://img.shields.io/badge/date%20created-20.10.23-purple?style=for-the-badge&labelColor=222)
+![Last Commit](https://img.shields.io/github/last-commit/MaxPopsuy/Entropy/master?style=for-the-badge&color=purple&labelColor=222)
 ## Quick Info
 
 **Entropy**, in general, is a task manager built into the terminal with various features such as:
