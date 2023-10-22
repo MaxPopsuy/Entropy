@@ -2,6 +2,7 @@
 
 .burger {
   max-width: 100px;
+  // position: sticky;
   z-index: 1;
   &__button {
     background-color: $black;

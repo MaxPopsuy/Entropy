@@ -9,6 +9,9 @@
 
 .page {
   width: 100vw;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
   // min-height: clamp(250px, 700px, 1000px);
 
   &__container {
@@ -46,8 +49,8 @@
     animation: gradient 7s linear infinite;
   }
   &__info {
-    font-size: 26px;
-    font-family: "VoidBold", "Poppins", "Nunito", Arial, Helvetica,
+    font-size: 28px;
+    font-family: "VoidRegular", "Poppins", "Nunito", Arial, Helvetica,
       sans-serif;
     color: $main-gray;
     padding: 15px;
@@ -55,11 +58,36 @@
     max-width: 500px;
     margin: 0 auto;
     text-align: center;
+
+    & span {
+      font-size: 30px;
+      font-family: $boldText;
+    }
     // text-overflow: overf;
   }
 
   &__image {
     position: absolute;
     display: none;
+  }
+
+  &__button {
+    max-width: 200px;
+    text-align: center;
+
+    padding: 15px 20px;
+    margin: 15px auto;
+
+    background-color: $secondary-gray;
+
+    transition: 0.3s all ease-in-out;
+    border: none;
+    outline: none;
+
+    &:hover {
+      background-color: $primary-pink;
+      border: none;
+      outline: none;
+    }
   }
 }

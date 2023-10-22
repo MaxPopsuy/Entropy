@@ -14,22 +14,24 @@ const HomePage = () => {
           <h1 className={styles["page__title"]}>Entropy</h1>
         </Slide>
         <p className={styles["page__info"]}>
-          Entropy Terminal Task Manager is a tool similar to a typical task
-          manager
+          <span>Entropy Task Manager</span> <br /> is a tool similar to a
+          typical task manager
         </p>
         <p className={styles["page__info"]}>
           But, since entropy itself is a terminal application, it has some
-          features such as Performance and speed, thanks to the absence of a
-          graphical interface
+          features such as <span>performance and speed</span> due to the lack of
+          a gui
         </p>
         <p className={styles["page__info"]}>
-          This is especially useful when every second counts.
+          This is especially useful when <span>every second counts</span>.
         </p>
         <p className={styles["page__info"]}>
-          Let's take a look at some of Entropy's features.
+          Let's take a look at some of <span>Entropy's features</span>.
         </p>
       </div>
+      
 
+      <button className={styles["page__button"]}>Download Entropy</button>
       {/* <p className={styles["page__description"]}>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer aliquam
         justo in condimentum convallis. Fusce sit amet egestas massa, ultricies

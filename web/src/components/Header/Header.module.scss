@@ -5,6 +5,10 @@
   display: flex;
   justify-content: space-between;
   padding: 10px 15px;
+  overflow: visible;
+  // position: sticky;
+  // top: -50px;
+  z-index: 10;
 
   &__logo {
     font-family: "Cubano";

@@ -69,11 +69,11 @@ button:focus-visible {
 }
 
 #root {
-  overflow: hidden;
+  overflow: visible;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   height: 100vh;
 }
 html { font-size: 62.5%;   } 
-body {  font-size: 1.6rem; overflow: hidden;}
+body {  font-size: 1.6rem;}
