@@ -174,7 +174,7 @@ namespace Entropy
 
             foreach (var process in processes)
             {
-                if(process.ProcessName == argument || process.Id.ToString() == argument)
+                if (process.ProcessName == argument || process.Id.ToString() == argument)
                 {
                     try
                     {
@@ -193,7 +193,82 @@ namespace Entropy
 
         public static void SuspendFunction(string argument, string _)
         {
-            
+            if (argument == null)
+            {
+                Utilities.EntropyWrite(ConsoleColor.Red, "No arguments given, please provide an argument, either <process.id> or <process.name>");
+                return;
+            }
+
+            var isFinded = false;
+
+            foreach (var process in Process.GetProcesses())
+            {
+                try
+                {
+                    if (process.Id.ToString() == argument)
+                    {
+                        Utilities.EntropySuspendProcess(int.Parse(argument));
+                        Utilities.EntropyWrite(ConsoleColor.Green, $"{process.Id}:::{process.ProcessName} >> suspended");
+                        isFinded = true;
+                    }
+                    if (process.ProcessName == argument)
+                    {
+                        Utilities.EntropySuspendProcess(process.Id);
+                        Utilities.EntropyWrite(ConsoleColor.Green, $"{process.Id}:::{process.ProcessName} >> suspended");
+                        isFinded = true;
+                    }
+                }
+                catch (Exception error)
+                {
+                    Utilities.EntropyWrite(ConsoleColor.Red, $"Failed to suspend process >> {error.Message}");
+                    isFinded = true;
+                }
+            }
+            if (!isFinded)
+            {
+                Utilities.EntropyWrite(ConsoleColor.Red, $"Process '{argument}' was not found");
+            }
+            Console.Write("\n");
+        }
+
+        public static void UnsuspendFunction(string argument, string _)
+        {
+            if (argument == null)
+            {
+                Utilities.EntropyWrite(ConsoleColor.Red, "No arguments given, please provide an argument, either <process.id> or <process.name>");
+                return;
+            }
+
+            var isFinded = false;
+
+            foreach (var process in Process.GetProcesses())
+            {
+                try
+                {
+                    if (process.Id.ToString() == argument)
+                    {
+                        Utilities.EntropyUnsuspendProcess(int.Parse(argument));
+                        Utilities.EntropyWrite(ConsoleColor.Green, $"{process.Id}:::{process.ProcessName} >> unsuspended");
+                        isFinded = true;
+                    }
+                    if (process.ProcessName == argument)
+                    {
+                        Utilities.EntropyUnsuspendProcess(process.Id);
+                        Utilities.EntropyWrite(ConsoleColor.Green, $"{process.Id}:::{process.ProcessName} >> unsuspended");
+                        isFinded = true;
+                    }
+                }
+                catch (Exception error)
+                {
+                    Utilities.EntropyWrite(ConsoleColor.Red, $"Failed to unsuspend process >> {error.Message}");
+                    isFinded = true;
+                }
+            }
+            if (!isFinded)
+            {
+                Utilities.EntropyWrite(ConsoleColor.Red, $"Process '{argument}' was not found");
+            }
+            Console.Write("\n");
         }
     }
 }

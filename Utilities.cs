@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using static Entropy.Commands;
+using static Entropy.Native;
 
 namespace Entropy
 {
@@ -56,6 +58,53 @@ namespace Entropy
             Console.ForegroundColor = color;
             Console.WriteLine(message);
             Console.ResetColor();
+        }
+
+        public static void EntropySuspendProcess(int processId)
+        {
+            var process = Process.GetProcessById(processId);
+
+            foreach (ProcessThread processThread in process.Threads)
+            {
+                IntPtr openThread = OpenThread(ThreadAccess.SUSPEND_RESUME, false, (uint)processThread.Id);
+
+                if (openThread == IntPtr.Zero)
+                {
+                    continue;
+                }
+
+                _ = SuspendThread(openThread);
+
+                CloseHandle(openThread);
+            }
+        }
+
+        public static void EntropyUnsuspendProcess(int processId)
+        {
+            var process = Process.GetProcessById(processId);
+
+            if (process.ProcessName == string.Empty)
+            {
+                return;
+            }
+
+            foreach (ProcessThread processThread in process.Threads)
+            {
+                IntPtr processOpenThread = OpenThread(ThreadAccess.SUSPEND_RESUME, false, (uint)processThread.Id);
+
+                if (processOpenThread == IntPtr.Zero)
+                {
+                    continue;
+                }
+
+                int suspendCount;
+                do
+                {
+                    suspendCount = ResumeThread(processOpenThread);
+                } while (suspendCount > 0);
+
+                CloseHandle(processOpenThread);
+            }
         }
     }
 }

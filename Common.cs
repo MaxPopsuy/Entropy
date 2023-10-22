@@ -17,7 +17,9 @@ namespace Entropy
             ["status"] = ["", "shows processes list. (aliases: ps, pl)"],
             ["terminate"] = ["<process.id> or <process.name>", "Terminates process by its name or id. (aliases: kill, kl, term)"],
             ["find"] = ["<process.id> or <process.name>", "Finds the process with specific name or id and returns its status"],
-            ["getpath"] = ["<process.id> or <process.name>", "Gets the process path from id or name (aliases: gp)"]
+            ["getpath"] = ["<process.id> or <process.name>", "Gets the process path from id or name (aliases: gp)"],
+            ["suspend"] = ["<process.id> or <process.name>", "Suspends the process from id or name (aliases: sp, spnd)"],
+            ["unsuspend"] = ["<process.id> or <process.name>", "Unsuspends the process from id or name (aliases: uns, us)"]
         };
 
         public static Dictionary<string, string[]> _commandsAliases = new()
@@ -27,7 +29,9 @@ namespace Entropy
             ["status"] = ["ps", "pl"],
             ["terminate"] = ["kill", "kl", "term"],
             ["find"] = [],
-            ["getpath"] = [ "gp"]
+            ["getpath"] = ["gp"],
+            ["suspend"] = ["sp", "spnd"],
+            ["unsuspend"] = ["uns", "us"]
         };
 
 
@@ -39,6 +43,8 @@ namespace Entropy
             ["terminate"] = TerminateFunction,
             ["find"] = FindFunction,
             ["getpath"] = GetPathFunction,
+            ["suspend"] = SuspendFunction,
+            ["unsuspend"] = UnsuspendFunction,
         };
     }
 
