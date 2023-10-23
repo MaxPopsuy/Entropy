@@ -1,4 +1,5 @@
-# Entropy - your all-in-one terminal task manager
+# Entropy - versatile and universal terminal task/process manager 
+
 
 ![Current version: beta 0.0.0](https://img.shields.io/badge/ver-beta%200.0.0-purple?style=for-the-badge&labelColor=222)
 ![Date created: 20.10.23](https://img.shields.io/badge/date%20created-20.10.23-purple?style=for-the-badge&labelColor=222)
