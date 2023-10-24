@@ -31,6 +31,8 @@ And with future versions and tons of my free time, there will be even more :)
 
 ## Known bugs
 
+- No bugs :)
+
 ## Future versions
 
 
