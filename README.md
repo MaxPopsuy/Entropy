@@ -27,7 +27,16 @@ And with future versions and tons of my free time, there will be even more :)
 
 # Version Features
 
+As of 1.0.0...
+
 ## Current Features
+
+- Suspend/Unsuspend processes
+- Terminating processes
+- Viewing list of all processes
+- Getting path of a process
+- Finding processes
+
 
 ## Known bugs
 
