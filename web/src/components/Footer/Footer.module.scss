@@ -1,3 +1,22 @@
+@import "@styles/variables.scss";
+
 .footer {
-  height: 1000px;
+  // min-height: 250px;
+  background-color: $black;
+
+  margin: 15px 0;
+
+  &__title {
+    font-size: 32px;
+    font-family: $titleFont;
+    text-align: center;
+    margin: 0;
+    color: $white;
+  }
+
+  &__text {
+    font-size: 20px;
+    font-family: $boldText;
+    text-align: center;
+  }
 }

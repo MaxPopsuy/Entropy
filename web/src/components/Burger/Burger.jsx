@@ -20,7 +20,7 @@ const Burger = () => {
           active && styles["burger__container--active"]
         )}
       >
-        <NavComponent onClick={() => setActive(true)} />
+        <NavComponent onClick={() => setActive(false)} />
       </div>
     </div>
   );
