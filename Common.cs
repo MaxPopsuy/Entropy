@@ -8,6 +8,11 @@ using static Entropy.Functions;
 
 namespace Entropy
 {
+    public class Common
+    {
+        public static string EntropyVersion = "1.0.0";
+    }
+
     public class Commands
     {
         public static Dictionary<string, string[]> _commandsDsc = new() // string[] = ["arguments", "description"]

@@ -15,12 +15,12 @@ namespace Entropy
         public static void EntropyScreen()
         {
             Console.ForegroundColor = ConsoleColor.DarkMagenta;
-            Console.WriteLine("███████╗███╗   ██╗████████╗██████╗  ██████╗ ██████╗ ██╗   ██╗");
-            Console.WriteLine("██╔════╝████╗  ██║╚══██╔══╝██╔══██╗██╔═══██╗██╔══██╗╚██╗ ██╔╝");
-            Console.WriteLine("█████╗  ██╔██╗ ██║   ██║   ██████╔╝██║   ██║██████╔╝ ╚████╔╝ ");
-            Console.WriteLine("██╔══╝  ██║╚██╗██║   ██║   ██╔══██╗██║   ██║██╔═══╝   ╚██╔╝  v - 0.0.0");
-            Console.WriteLine("███████╗██║ ╚████║   ██║   ██║  ██║╚██████╔╝██║        ██║   ");
-            Console.WriteLine("╚══════╝╚═╝  ╚═══╝   ╚═╝   ╚═╝  ╚═╝ ╚═════╝ ╚═╝        ╚═╝   ");
+            Console.WriteLine($"███████╗███╗   ██╗████████╗██████╗  ██████╗ ██████╗ ██╗   ██╗");
+            Console.WriteLine($"██╔════╝████╗  ██║╚══██╔══╝██╔══██╗██╔═══██╗██╔══██╗╚██╗ ██╔╝");
+            Console.WriteLine($"█████╗  ██╔██╗ ██║   ██║   ██████╔╝██║   ██║██████╔╝ ╚████╔╝ ");
+            Console.WriteLine($"██╔══╝  ██║╚██╗██║   ██║   ██╔══██╗██║   ██║██╔═══╝   ╚██╔╝  v - {Common.EntropyVersion}");
+            Console.WriteLine($"███████╗██║ ╚████║   ██║   ██║  ██║╚██████╔╝██║        ██║   ");
+            Console.WriteLine($"╚══════╝╚═╝  ╚═══╝   ╚═╝   ╚═╝  ╚═╝ ╚═════╝ ╚═╝        ╚═╝   ");
 
             Console.WriteLine("Write h or help for list of commands, welcome to entropy!");
 
@@ -29,6 +29,7 @@ namespace Entropy
 
         public static void EntropyWaitAnimation()
         {
+            Console.ForegroundColor = ConsoleColor.DarkMagenta;
             Console.Write(">>");
             Thread.Sleep(50);
             Console.Write("\b");
@@ -39,6 +40,7 @@ namespace Entropy
             Thread.Sleep(50);
             Console.Write("\b");
             Console.Write(": ");
+            Console.ResetColor();
         }
 
         public static string EntropyGetCommandFromAlias(string command)
