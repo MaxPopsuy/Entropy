@@ -18,7 +18,7 @@
 As a developer I have some plans for such features as:
 
 - **Real-time** display of CPU, RAM, GPU usage (possibly even with a graph).
-- **Capability** to sort processes by CPU, RAN or GPU usage
+- **Capability** to sort processes by CPU, RAM or GPU usage
 - **Versatility** - so that anyone who knows C# can easily make changes in the code and create their own modifications for entropy
 - **and much more!**
    
