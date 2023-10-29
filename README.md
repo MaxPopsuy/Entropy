@@ -3,7 +3,7 @@
 
 ![Current version: beta 0.0.0](https://img.shields.io/badge/ver-beta%200.0.0-purple?style=for-the-badge&labelColor=222)
 ![Date created: 20.10.23](https://img.shields.io/badge/date%20created-20.10.23-purple?style=for-the-badge&labelColor=222)
-![Last Commit](https://img.shields.io/github/last-commit/MaxPopsuy/Entropy/master?style=for-the-badge&color=purple&labelColor=222)
+![Last Commit](https://img.shields.io/github/last-commit/MaxPopsuy/Entropy/master?style=for-the-badge&labelColor=222&color=purple)
 [![License: MIT](https://img.shields.io/badge/License-MIT-purple.svg?style=for-the-badge&labelColor=222)](https://github.com/MaxPopsuy/Entropy/blob/master/LICENSE.md)
 
 ## Quick Info
