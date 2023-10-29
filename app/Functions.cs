@@ -80,14 +80,9 @@ namespace Entropy
                 {
                     try
                     {
-                        if (process.ProcessName.ToString() == "Entropy")
-                        {
-                            Utilities.EntropyWrite(ConsoleColor.Red, $"What????");
-                            return;
-                        }
+
                         if (process.Id.ToString() == argument)
                         {
-
                             process.Kill();
                             Utilities.EntropyWrite(ConsoleColor.Green, $"{process.Id}:::{process.ProcessName} was succesfully terminated.");
                             isFinded = true;
