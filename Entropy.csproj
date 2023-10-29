@@ -1,24 +1,22 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <OutputType>Exe</OutputType>
+    <OutputType>exe</OutputType>
     <TargetFramework>net6.0-windows</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
     <PublishSingleFile>true</PublishSingleFile>
     <SelfContained>true</SelfContained>
     <RuntimeIdentifier>win-x64</RuntimeIdentifier>
-    <Nullable>enable</Nullable>
+    <PublishReadyToRun>true</PublishReadyToRun>
+    <PublishTrimmed>true</PublishTrimmed>
     <LangVersion>preview</LangVersion>
     <ApplicationIcon>entropy2.ico</ApplicationIcon>
+    <TrimMode>link</TrimMode>
   </PropertyGroup>
 
   <ItemGroup>
     <Content Include="entropy2.ico" />
   </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="ilmerge" Version="3.0.29" />
-  </ItemGroup>
-
 
 </Project>

@@ -69,7 +69,7 @@ namespace Entropy
             foreach (ProcessThread processThread in process.Threads)
             {
                 IntPtr openThread = OpenThread(ThreadAccess.SUSPEND_RESUME, false, (uint)processThread.Id);
-
+                    
                 if (openThread == IntPtr.Zero)
                 {
                     continue;

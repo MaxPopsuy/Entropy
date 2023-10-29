@@ -4,7 +4,6 @@ using System.Diagnostics;
 using System.Diagnostics.Tracing;
 using System.Runtime.InteropServices;
 using static Entropy.Commands;
-using System.Linq;
 
 class Program
 {

@@ -1,0 +1,3 @@
+@echo off
+echo Wait for build and run project...
+dotnet run
