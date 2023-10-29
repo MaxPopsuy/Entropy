@@ -1,7 +1,7 @@
 # Entropy - versatile and universal terminal task/process manager 
 
 
-![Current version: beta 0.0.0](https://img.shields.io/badge/ver-beta%200.0.0-purple?style=for-the-badge&labelColor=222)
+![Current version: 1.0.1](https://img.shields.io/badge/ver-1.0.1-purple?style=for-the-badge&labelColor=222)
 ![Date created: 20.10.23](https://img.shields.io/badge/date%20created-20.10.23-purple?style=for-the-badge&labelColor=222)
 ![Last Commit](https://img.shields.io/github/last-commit/MaxPopsuy/Entropy/master?style=for-the-badge&labelColor=222&color=purple)
 [![License: MIT](https://img.shields.io/badge/License-MIT-purple.svg?style=for-the-badge&labelColor=222)](https://github.com/MaxPopsuy/Entropy/blob/master/LICENSE.md)
@@ -57,6 +57,7 @@ v1.1.0:
 - add ram/cpu/gpu usage to list of processes
 - finally make process list as a table
 - add second argument to sort by ram/cpu/gpu usage or id
+- advanced find (?)
 
 v1.2.0:
 
