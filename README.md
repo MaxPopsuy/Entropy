@@ -27,7 +27,14 @@ And with future versions and tons of my free time, there will be even more :)
 
 # Version Features
 
-As of 1.0.0...
+As of version 1.0.0:
+
+Entropy has basic tools for process management:
+
+- **suspend/unsuspend processes**
+- **terminate processes**
+- **get process path**
+- **find processes.**
 
 ## Current Features
 
@@ -40,12 +47,31 @@ As of 1.0.0...
 
 ## Known bugs
 
-- No bugs :)
+- Bugs with color on custom theme terminal
+- Bugs with color of text
 
 ## Future versions
 
+v1.1.0:
 
+- add ram/cpu/gpu usage to list of processes
+- finally make process list as a table
+- add second argument to sort by ram/cpu/gpu usage or id
 
+v1.2.0:
+
+- add graphs of ram/cpu/gpu usage
+- show detailed stats of your processes usage of ram/cpu/gpu
+- more functions
+
+v1.3.0:
+
+- more commands and functions (?)
+
+v2.0.0:
+
+- custom loader for user mods (?)
+- net scanner (?)
 
 
 
@@ -70,5 +96,5 @@ As of 1.0.0...
 # Footer
 
 Is anyone reading it at all? 
-And if anyone is reading it, I want to say thanks to [Sheud](https://github.com/Sheudz) for the inspiration and advices ;)
+And if anyone is reading it, I want to say thanks to [Sheud](https://github.com/Sheudz) for the inspiration ;)
 
