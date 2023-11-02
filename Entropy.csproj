@@ -19,4 +19,13 @@
     <Content Include="entropy2.ico" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Spectre.Console" Version="0.47.0" />
+  </ItemGroup>
+
+     
+  
+  
+
+
 </Project>

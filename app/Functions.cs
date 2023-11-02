@@ -1,6 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
+﻿using System.Diagnostics;
+using System.Drawing;
+using Spectre;
+using Spectre.Console;
 
 namespace Entropy
 {
@@ -36,6 +37,17 @@ namespace Entropy
             Console.ResetColor();
 
             var status = Process.GetProcesses();
+            var table = new Table().LeftAligned();
+            //table.Border = TableBorder.Heavy;
+            table.Expand();
+
+
+            table.AddColumn(new TableColumn("id").Centered());
+            table.AddColumn(new TableColumn("name").LeftAligned());
+            table.AddColumn(new TableColumn("status").Centered());
+            table.Columns[0].Padding(4, 2);
+            table.Columns[1].Padding(4, 2);
+            table.Columns[2].Padding(4, 2);
 
             foreach (var process in status)
             {
@@ -53,17 +65,20 @@ namespace Entropy
 
                 if (isSuspended)
                 {
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine($"{process.Id}:::{process.ProcessName}:::Suspended");
-                    Console.ResetColor();
+                    //Console.ForegroundColor = ConsoleColor.Red;
+                    table.AddRow(process.Id.ToString(), process.ProcessName.ToString().ToUpper(), "[red]suspended[/]");
+                    //Console.WriteLine($"{process.Id}:::{process.ProcessName}:::Suspended");
+                    //Console.ResetColor();
                 }
                 else
                 {
-                    Console.ForegroundColor = ConsoleColor.Green;
-                    Console.WriteLine($"{process.Id}:::{process.ProcessName}:::Working");
-                    Console.ResetColor();
+                    table.AddRow(process.Id.ToString(), process.ProcessName.ToString().ToUpper(), "[green1]working[/]");
+                    //Console.ForegroundColor = ConsoleColor.Green;
+                    //Console.WriteLine($"{process.Id}:::{process.ProcessName}:::Working");
+                    //Console.ResetColor();
                 }
             }
+            AnsiConsole.Write(table);
             Console.Write("\n");
         }
 
@@ -136,7 +151,7 @@ namespace Entropy
                 if (isSuspended)
                 {
                     int id;
-                    if (int.TryParse(argument, out id) && process.Id == id || process.ProcessName == argument)
+                    if (int.TryParse(argument, out id) && process.Id == id || process.ProcessName.ToLower() == argument.ToLower())
                     {
                         procArray.Add(id);
                         Utilities.EntropyWrite(ConsoleColor.Red, $"{process.Id}:::{process.ProcessName}:::Suspended");
@@ -145,7 +160,7 @@ namespace Entropy
                 else
                 {
                     int id;
-                    if (int.TryParse(argument, out id) && process.Id == id || process.ProcessName == argument)
+                    if (int.TryParse(argument, out id) && process.Id == id || process.ProcessName.ToLower() == argument.ToLower())
                     {
                         procArray.Add(id);
                         Utilities.EntropyWrite(ConsoleColor.Green, $"{process.Id}:::{process.ProcessName}:::Working");
