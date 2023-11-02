@@ -62,6 +62,7 @@ v1.1.0:
 - finally make process list as a table
 - add second argument to sort by ram/cpu/gpu usage or id
 - advanced find (?)
+- change help command to more advanced
 
 v1.2.0:
 
@@ -71,6 +72,7 @@ v1.2.0:
 
 v1.3.0:
 
+- add autostart commands
 - more commands and functions (?)
 
 v2.0.0:
