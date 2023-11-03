@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 using System.Drawing;
 using Spectre;
 using Spectre.Console;
@@ -9,18 +10,23 @@ namespace Entropy
     {
         public static void HelpFunction(string _, string __)
         {
+            Table helpTable = new Table().Centered();
+            helpTable.Expand();
+            helpTable.Border = TableBorder.Double;
+
+            helpTable.AddColumn(new TableColumn("COMMAND").Centered());
+            helpTable.AddColumn(new TableColumn("PARAMS").Centered());
+            helpTable.AddColumn(new TableColumn("DESCRIPTION").Centered());
+            helpTable.Columns[0].Padding(4, 2);
+            helpTable.Columns[1].Padding(4, 2);
+            helpTable.Columns[2].Padding(4, 2);
+
+            Console.ResetColor();
             foreach (var (key, value) in Commands._commandsDsc)
             {
-                //Utilities.EntropyWrite(ConsoleColor.DarkMagenta, $"{key} {value[0]} - {value[1]}");
-                Console.WriteLine("");
-                Console.ForegroundColor = ConsoleColor.White;
-                Console.Write($"{key}");
-                Console.ForegroundColor = ConsoleColor.Green;
-                Console.Write($" {value[0]}");
-                Console.ForegroundColor = ConsoleColor.White;
-                Console.Write($" - {value[1]}");
-                Console.ResetColor();
+                helpTable.AddRow($"[white]{key}[/]", $"[green1]{(value[0].Length == 0 ? "-" : value[0])}[/]", $"[white]{value[1]}[/]"); 
             }
+            AnsiConsole.Write(helpTable);
             Console.WriteLine("\n");
         }
 
@@ -32,13 +38,8 @@ namespace Entropy
 
         public static void StatusFunction(string _, string __)
         {
-            Console.ForegroundColor = ConsoleColor.White;
-            Console.WriteLine("pID:::pName:::status \n");
-            Console.ResetColor();
-
             var status = Process.GetProcesses();
             var table = new Table().LeftAligned();
-            //table.Border = TableBorder.Heavy;
             table.Expand();
 
 
@@ -65,17 +66,11 @@ namespace Entropy
 
                 if (isSuspended)
                 {
-                    //Console.ForegroundColor = ConsoleColor.Red;
                     table.AddRow(process.Id.ToString(), process.ProcessName.ToString().ToUpper(), "[red]suspended[/]");
-                    //Console.WriteLine($"{process.Id}:::{process.ProcessName}:::Suspended");
-                    //Console.ResetColor();
                 }
                 else
                 {
                     table.AddRow(process.Id.ToString(), process.ProcessName.ToString().ToUpper(), "[green1]working[/]");
-                    //Console.ForegroundColor = ConsoleColor.Green;
-                    //Console.WriteLine($"{process.Id}:::{process.ProcessName}:::Working");
-                    //Console.ResetColor();
                 }
             }
             AnsiConsole.Write(table);
@@ -95,25 +90,53 @@ namespace Entropy
                         if (process.Id.ToString() == argument)
                         {
                             process.Kill();
-                            Utilities.EntropyWrite(ConsoleColor.Green, $"{process.Id}:::{process.ProcessName} was succesfully terminated.");
+                            Console.ResetColor();
+                            Panel result = new($"ID:{process.Id}\nNAME:{process.ProcessName}\nSTATUS:[green1]Succesfully Terminated[/]")
+                            {
+                                Border = BoxBorder.Rounded
+                            };
+                            result.HeaderAlignment(Justify.Center);
+                            result.Header($"Find: {process.Id}");
+                            AnsiConsole.Write(result);
                             isFinded = true;
                         }
-                        if (process.ProcessName == argument)
+                        if (process.ProcessName.ToLower() == argument.ToLower())
                         {
                             process.Kill();
-                            Utilities.EntropyWrite(ConsoleColor.Green, $"{process.Id}:::{process.ProcessName} was succesfully terminated.");
+                            Console.ResetColor();
+                            Panel result = new($"ID:{process.Id}\nNAME:{process.ProcessName}\nSTATUS:[green1]Succesfully Terminated[/]")
+                            {
+                                Border = BoxBorder.Rounded
+                            };
+                            result.HeaderAlignment(Justify.Center);
+                            result.Header($"Find: {process.Id}");
+                            AnsiConsole.Write(result);
                             isFinded = true;
                         }
                     }
                     catch (Exception ex)
                     {
-                        Utilities.EntropyWrite(ConsoleColor.Red, $"Failed to kill process >>> {ex.Message}.");
+                        Console.ResetColor();
+                        Panel result = new($"ID: {process.Id}\nNAME:{process.ProcessName}\nSTATUS:[red]Failed to Terminate[/]\n{ex.Message}")
+                        {
+                            Border = BoxBorder.Rounded
+                        };
+                        result.HeaderAlignment(Justify.Center);
+                        result.Header($"Find: {process.Id}");
+                        AnsiConsole.Write(result);
                         isFinded = true;
                     }
                 }
                 if (isFinded == false)
                 {
-                    Utilities.EntropyWrite(ConsoleColor.Red, $"{argument} not found.");
+                    Console.ResetColor();
+                    Panel result = new($"ARGUMENT:{argument}\nSTATUS:[red]Not Found[/]")
+                    {
+                        Border = BoxBorder.Rounded
+                    };
+                    result.HeaderAlignment(Justify.Center);
+                    result.Header($"Find: {argument}");
+                    AnsiConsole.Write(result);
                 }
                 Console.Write("\n");
             }
@@ -154,7 +177,14 @@ namespace Entropy
                     if (int.TryParse(argument, out id) && process.Id == id || process.ProcessName.ToLower() == argument.ToLower())
                     {
                         procArray.Add(id);
-                        Utilities.EntropyWrite(ConsoleColor.Red, $"{process.Id}:::{process.ProcessName}:::Suspended");
+                        Console.ResetColor();
+                        Panel result = new($"ID: {process.Id}\nNAME:{process.ProcessName}\nSTATUS:[red]Suspended[/]")
+                        {
+                            Border = BoxBorder.Rounded
+                        };
+                        result.HeaderAlignment(Justify.Center);
+                        result.Header($"Find: {process.Id}");
+                        AnsiConsole.Write(result);
                     }
                 }
                 else
@@ -163,13 +193,27 @@ namespace Entropy
                     if (int.TryParse(argument, out id) && process.Id == id || process.ProcessName.ToLower() == argument.ToLower())
                     {
                         procArray.Add(id);
-                        Utilities.EntropyWrite(ConsoleColor.Green, $"{process.Id}:::{process.ProcessName}:::Working");
+                        Console.ResetColor();
+                        Panel result = new($"ID:{process.Id}\nNAME:{process.ProcessName}\nSTATUS:[green1]Working[/]")
+                        {
+                            Border = BoxBorder.Rounded
+                        };
+                        result.HeaderAlignment(Justify.Center);
+                        result.Header($"Find: {process.Id}");
+                        AnsiConsole.Write(result);
                     }
                 }
             }
             if (procArray.Count == 0)
             {
-                Utilities.EntropyWrite(ConsoleColor.Red, $"No processes with this specific id or name were found");
+                Console.ResetColor();
+                Panel result = new("[red]No processes with this specific id or name were found[/]")
+                {
+                    Border = BoxBorder.Rounded
+                };
+                result.HeaderAlignment(Justify.Center);
+                result.Header("Find Result");
+                AnsiConsole.Write(result);
             }
             /*Console.WriteLine("\n");*/
         }
