@@ -60,15 +60,15 @@ v1.1.0:
 
 - add ram/cpu/gpu usage to list of processes
 - finally make process list as a table
-- add second argument to sort by ram/cpu/gpu usage or id
 - advanced find (?)
-- change help command to more advanced
+- more advanced help command 
 
 v1.2.0:
 
-- add graphs of ram/cpu/gpu usage
+- add charts of ram/cpu/gpu usage
 - show detailed stats of your processes usage of ram/cpu/gpu
 - more functions
+- advanced status function (i.e. sort by name/ram usage etc.)
 
 v1.3.0:
 
@@ -98,10 +98,4 @@ v2.0.0:
 # Gallery
 ![ENTROPY](https://github.com/MaxPopsuy/Entropy/blob/master/images/entropy.png)
 ![ENTROPY](https://github.com/MaxPopsuy/Entropy/blob/master/images/entropy3.png)
-
-
-# Footer
-
-Is anyone reading it at all? 
-And if anyone is reading it, I want to say thanks to [Sheud](https://github.com/Sheudz) for the inspiration ;)
 
