@@ -21,6 +21,7 @@
 
   <ItemGroup>
     <PackageReference Include="Spectre.Console" Version="0.47.0" />
+    <PackageReference Include="System.Diagnostics.PerformanceCounter" Version="7.0.0" />
   </ItemGroup>
 
      

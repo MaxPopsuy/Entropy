@@ -3,6 +3,10 @@ using System.Diagnostics;
 using System.Drawing;
 using Spectre;
 using Spectre.Console;
+using System.Threading;
+using System.Collections;
+using System.Collections.Specialized;
+using System.Dynamic;
 
 namespace Entropy
 {
@@ -17,14 +21,14 @@ namespace Entropy
             helpTable.AddColumn(new TableColumn("COMMAND").Centered());
             helpTable.AddColumn(new TableColumn("PARAMS").Centered());
             helpTable.AddColumn(new TableColumn("DESCRIPTION").Centered());
-            helpTable.Columns[0].Padding(4, 2);
-            helpTable.Columns[1].Padding(4, 2);
-            helpTable.Columns[2].Padding(4, 2);
+            helpTable.Columns[0].Padding(2, 10);
+            helpTable.Columns[1].Padding(2, 10);
+            helpTable.Columns[2].Padding(2, 10);
 
             Console.ResetColor();
             foreach (var (key, value) in Commands._commandsDsc)
             {
-                helpTable.AddRow($"[white]{key}[/]", $"[green1]{(value[0].Length == 0 ? "-" : value[0])}[/]", $"[white]{value[1]}[/]"); 
+                helpTable.AddRow($"[white]{key}[/]", $"[green1]{(value[0].Length == 0 ? "-" : value[0])}[/]", $"[white]{value[1]}[/]");
             }
             AnsiConsole.Write(helpTable);
             Console.WriteLine("\n");
@@ -96,7 +100,7 @@ namespace Entropy
                                 Border = BoxBorder.Rounded
                             };
                             result.HeaderAlignment(Justify.Center);
-                            result.Header($"Find: {process.Id}");
+                            result.Header($"Terminate: {process.Id}");
                             AnsiConsole.Write(result);
                             isFinded = true;
                         }
@@ -109,7 +113,7 @@ namespace Entropy
                                 Border = BoxBorder.Rounded
                             };
                             result.HeaderAlignment(Justify.Center);
-                            result.Header($"Find: {process.Id}");
+                            result.Header($"Terminate: {process.Id}");
                             AnsiConsole.Write(result);
                             isFinded = true;
                         }
@@ -122,7 +126,7 @@ namespace Entropy
                             Border = BoxBorder.Rounded
                         };
                         result.HeaderAlignment(Justify.Center);
-                        result.Header($"Find: {process.Id}");
+                        result.Header($"Terminate: {process.Id}");
                         AnsiConsole.Write(result);
                         isFinded = true;
                     }
@@ -135,7 +139,7 @@ namespace Entropy
                         Border = BoxBorder.Rounded
                     };
                     result.HeaderAlignment(Justify.Center);
-                    result.Header($"Find: {argument}");
+                    result.Header($"Terminate: [red]ERROR[/]");
                     AnsiConsole.Write(result);
                 }
                 Console.Write("\n");
@@ -148,11 +152,6 @@ namespace Entropy
 
         public static void FindFunction(string argument, string _)
         {
-            if (string.IsNullOrEmpty(argument))
-            {
-                Utilities.EntropyWrite(ConsoleColor.Red, "Please provide an argument, either the process id or the process name \n");
-                return;
-            }
             var processes = Process.GetProcesses();
             var procArray = new List<int>();
 
@@ -174,32 +173,40 @@ namespace Entropy
                 if (isSuspended)
                 {
                     int id;
-                    if (int.TryParse(argument, out id) && process.Id == id || process.ProcessName.ToLower() == argument.ToLower())
+                    if (int.TryParse(argument, out id) && process.Id == id || process.ProcessName.ToLower().Contains(argument.ToLower()))
                     {
                         procArray.Add(id);
+                        PerformanceCounter cpuCounter = new("Process", "% Processor Time", process.ProcessName);
+                        cpuCounter.NextValue();
+                        float cpuUsage = (int)cpuCounter.NextValue();
+
                         Console.ResetColor();
-                        Panel result = new($"ID: {process.Id}\nNAME:{process.ProcessName}\nSTATUS:[red]Suspended[/]")
+                        Panel result = new($"ID:[white]{process.Id}[/]\nNAME:[white]{process.ProcessName}[/]\nSTATUS:[red]Suspended[/]\nRAM:[white]{process.PrivateMemorySize64 / 1000 / 1024} Mb[/]\nCPU:[white]{(cpuUsage <= 1 ? "<1" : cpuUsage)}%[/]")
                         {
                             Border = BoxBorder.Rounded
                         };
                         result.HeaderAlignment(Justify.Center);
-                        result.Header($"Find: {process.Id}");
+                        result.Header($"Find: [white]{process.Id}[/]");
                         AnsiConsole.Write(result);
                     }
                 }
                 else
                 {
                     int id;
-                    if (int.TryParse(argument, out id) && process.Id == id || process.ProcessName.ToLower() == argument.ToLower())
+                    if (int.TryParse(argument, out id) && process.Id == id || process.ProcessName.ToLower().Contains(argument.ToLower()))
                     {
                         procArray.Add(id);
+                        PerformanceCounter cpuCounter = new("Process", "% Processor Time", process.ProcessName);
+                        cpuCounter.NextValue();
+                        float cpuUsage = (int)cpuCounter.NextValue();
+
                         Console.ResetColor();
-                        Panel result = new($"ID:{process.Id}\nNAME:{process.ProcessName}\nSTATUS:[green1]Working[/]")
+                        Panel result = new($"ID:[white]{process.Id}[/]\nNAME:[white]{process.ProcessName}[/]\nSTATUS:[green1]Working[/]\nRAM:[white]{process.PrivateMemorySize64 / 1000 / 1024} Mb[/]\nCPU:[white]{(cpuUsage <= 1 ? "<1" : cpuUsage)}%[/]")
                         {
                             Border = BoxBorder.Rounded
                         };
                         result.HeaderAlignment(Justify.Center);
-                        result.Header($"Find: {process.Id}");
+                        result.Header($"Find: [white]{process.Id}[/]");
                         AnsiConsole.Write(result);
                     }
                 }
@@ -221,23 +228,51 @@ namespace Entropy
         public static void GetPathFunction(string argument, string _)
         {
             var processes = Process.GetProcesses();
+            bool isFinded = false;
 
             foreach (var process in processes)
             {
-                if (process.ProcessName == argument || process.Id.ToString() == argument)
+                if (process.ProcessName.ToLower() == argument.ToLower() || process.Id.ToString() == argument)
                 {
                     try
                     {
                         if (process != null && process.MainModule != null)
                         {
-                            Utilities.EntropyWrite(ConsoleColor.Green, $"{process.Id}:::{process.ProcessName} > {process.MainModule.FileName}");
+                            Console.ResetColor();
+                            Panel result = new($"ID:{process.Id}\nNAME:{process.ProcessName}\nPATH:[green1]{process.MainModule.FileName}[/]")
+                            {
+                                Border = BoxBorder.Rounded
+                            };
+                            result.HeaderAlignment(Justify.Center);
+                            result.Header("GetPath result");
+                            AnsiConsole.Write(result);
+                            isFinded = true;
                         }
                     }
                     catch (Exception ex)
                     {
-                        Utilities.EntropyWrite(ConsoleColor.Red, $"Failed to access path for process: {process.Id}:::{process.ProcessName} >> {ex.Message}");
+                        Console.ResetColor();
+                        Panel result = new($"ID:{process.Id}\nNAME:{process.ProcessName}\nERROR:[red]{ex.Message}[/]")
+                        {
+                            Border = BoxBorder.Rounded
+                        };
+                        result.HeaderAlignment(Justify.Center);
+                        result.Header("GetPath error");
+                        AnsiConsole.Write(result);
+                        isFinded = true;
                     }
                 }
+            }
+            if (!isFinded)
+            {
+                Console.ResetColor();
+                Panel result = new($"ARGUMENT:{argument}\nERROR:[red]Process not found[/]")
+                {
+                    Border = BoxBorder.Rounded
+                };
+                result.HeaderAlignment(Justify.Center);
+                result.Header("GetPath error");
+                AnsiConsole.Write(result);
             }
         }
 
