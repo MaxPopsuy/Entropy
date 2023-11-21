@@ -29,16 +29,18 @@ As a developer I have some plans for such features as:
 And with future versions and tons of my free time, there will be even more :)
 
 
-# Version Features
+# Version Logs
 
-As of version 1.0.0:
-
-Entropy has basic tools for process management:
-
-- **suspend/unsuspend processes**
-- **terminate processes**
-- **get process path**
-- **find processes.**
+<details>
+  <summary>Logs:</summary>
+   
+| VER | DESCRIPTION | STATUS |
+| --- | ----------- | ------ |
+| 1.0.X | First released version | In Release |
+| 1.0.1 | Fixed some minor and one major bugs | In Release |
+| 1.0.2 | In general, just fixed some minor bugs and rebuild project to build more lightweight | In Release |
+ 
+</details> 
 
 ## Current Features
 
@@ -51,10 +53,19 @@ Entropy has basic tools for process management:
 
 ## Known bugs
 
-- Bugs with color on custom theme terminal
+- Bugs with color on custom theme terminal (like Windows Terminal)
 - Bugs with color of text
 
 ## Future versions
+
+| VER | DESCRIPTION | STATUS |
+| --- | ----------- | ------ |
+| 1.0.0 | Current version as it is | In Release |
+| 1.1.0 | Some new content, but not much changed | Inwork |
+| 1.2.0 | There's some progress on version, but no further information | :x: |
+| 1.3.0 | Also some progress | :x: | 
+| 2.0.0 | Major update | :x: |
+
 
 v1.1.0:
 
