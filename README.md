@@ -55,6 +55,8 @@ And with future versions and tons of my free time, there will be even more :)
 
 - Bugs with color on custom theme terminal (like Windows Terminal)
 - Bugs with color of text
+- Bug with find function
+- Unexpected error for unknown reasons(probably because of find function)
 
 ## Future versions
 
@@ -89,6 +91,7 @@ v1.3.0:
 v2.0.0:
 
 - custom loader for user mods (?)
+- - so i think in theory, i can make some code to kinda "load" other files(e.g. "mods") into some point in code, but i think I'll only do this for custom themes, which you can change right in terminal itself
 - net scanner (?)
 
 
