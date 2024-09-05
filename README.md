@@ -39,7 +39,7 @@ And with future versions and tons of my free time, there will be even more :)
 | 1.0.X | First released version | In Release |
 | 1.0.1 | Fixed some minor and one major bugs | In Release |
 | 1.0.2 | In general, just fixed some minor bugs and rebuild project to build more lightweight | In Release |
-| 1.0.3 | In general, just fixed some minor bugs and rebuild project to build more lightweight | In Release |
+| 1.0.3 | Removed some leftover code and some minor fixes | In Release |
  
 </details> 
 
