@@ -78,6 +78,7 @@ v1.1.0:
 - advanced find (?)
 - more advanced help command
 - better terminal ui
+- better version handling
 
 v1.2.0:
 
