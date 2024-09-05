@@ -85,7 +85,7 @@ namespace Entropy
 
         public static void TerminateFunction(string argument, string _)
         {
-            Console.Write("\n");
+            Console.WriteLine();
             if (argument != null)
             {
                 bool isFinded = false;
@@ -94,29 +94,16 @@ namespace Entropy
                     try
                     {
 
-                        if (process.Id.ToString() == argument)
+                        if (process.Id.ToString() == argument || process.ProcessName.ToLower() == argument.ToLower())
                         {
                             process.Kill();
                             Console.ResetColor();
-                            Panel result = new($"ID:{process.Id}\nNAME:{process.ProcessName}\nSTATUS:[green1]Succesfully Terminated[/]")
+                            Panel result = new($"[purple]ID: [white]{process.Id}[/]\nNAME: [white]{process.ProcessName}[/]\nSTATUS: [green1]Succesfully Terminated[/][/]")
                             {
                                 Border = BoxBorder.Rounded
                             };
                             result.HeaderAlignment(Justify.Center);
-                            result.Header($"Terminate: {process.Id}");
-                            AnsiConsole.Write(result);
-                            isFinded = true;
-                        }
-                        if (process.ProcessName.ToLower() == argument.ToLower())
-                        {
-                            process.Kill();
-                            Console.ResetColor();
-                            Panel result = new($"ID:{process.Id}\nNAME:{process.ProcessName}\nSTATUS:[green1]Succesfully Terminated[/]")
-                            {
-                                Border = BoxBorder.Rounded
-                            };
-                            result.HeaderAlignment(Justify.Center);
-                            result.Header($"Terminate: {process.Id}");
+                            result.Header($"[purple]Terminate: [white]{process.Id}[/][/]");
                             AnsiConsole.Write(result);
                             isFinded = true;
                         }
@@ -124,12 +111,12 @@ namespace Entropy
                     catch (Exception ex)
                     {
                         Console.ResetColor();
-                        Panel result = new($"ID: {process.Id}\nNAME:{process.ProcessName}\nSTATUS:[red]Failed to Terminate[/]\n{ex.Message}")
+                        Panel result = new($"[purple]ID: {process.Id}\nNAME:{process.ProcessName}\nSTATUS:[red]Failed to Terminate[/]\n{ex.Message}[/]")
                         {
                             Border = BoxBorder.Rounded
                         };
                         result.HeaderAlignment(Justify.Center);
-                        result.Header($"Terminate: {process.Id}");
+                        result.Header($"[purple]Terminate: [white]{process.Id}[/][/]");
                         AnsiConsole.Write(result);
                         isFinded = true;
                     }
@@ -137,19 +124,14 @@ namespace Entropy
                 if (isFinded == false)
                 {
                     Console.ResetColor();
-                    Panel result = new($"ARGUMENT:{argument}\nSTATUS:[red]Not Found[/]")
+                    Panel result = new($"[purple]ARGUMENT: [white]{(argument == "" ? "You did not pass an argument" : argument)}[/]\nSTATUS: [red]Not Found[/][/]")
                     {
                         Border = BoxBorder.Rounded
                     };
                     result.HeaderAlignment(Justify.Center);
-                    result.Header($"Terminate: [red]ERROR[/]");
+                    result.Header($"[purple]Terminate: [red]ERROR[/][/]");
                     AnsiConsole.Write(result);
                 }
-                Console.Write("\n");
-            }
-            else
-            {
-                Console.WriteLine("You didn't pass an argument, use the `terminate` command like this: `terminate <process.name>` or `terminate <process.pid>'\n");
             }
             Console.Write("\n");
         }
@@ -221,7 +203,7 @@ namespace Entropy
                 result.Header("Find Result");
                 AnsiConsole.Write(result);
             }
-            Console.WriteLine("\n");
+            Console.WriteLine();
         }
 
         public static void GetPathFunction(string argument, string _)
@@ -282,7 +264,14 @@ namespace Entropy
             Console.Write("\n");
             if (argument == null)
             {
-                Utilities.EntropyWrite(ConsoleColor.Red, "No arguments given, please provide an argument, either <process.id> or <process.name>");
+                Console.ResetColor();
+                Panel result = new($"[purple]Error: [red]No arguments given, please provide an argument, either [green]<process.id>[/] or [green]<process.name>[/][/][/]")
+                {
+                    Border = BoxBorder.Rounded
+                };
+                result.HeaderAlignment(Justify.Center);
+                result.Header("[purple]Suspend: [red]Error[/][/]");
+                AnsiConsole.Write(result);
                 return;
             }
 
@@ -292,28 +281,44 @@ namespace Entropy
             {
                 try
                 {
-                    if (process.Id.ToString() == argument)
-                    {
-                        Utilities.EntropySuspendProcess(int.Parse(argument));
-                        Utilities.EntropyWrite(ConsoleColor.Green, $"{process.Id}:::{process.ProcessName} >> suspended");
-                        isFinded = true;
-                    }
-                    if (process.ProcessName == argument)
+                    if (process.Id.ToString() == argument || process.ProcessName == argument)
                     {
                         Utilities.EntropySuspendProcess(process.Id);
-                        Utilities.EntropyWrite(ConsoleColor.Green, $"{process.Id}:::{process.ProcessName} >> suspended");
+                        Console.ResetColor();
+                        Panel result = new($"[purple]ID: [white]{process.Id}[/]\nNAME: [white]{process.ProcessName}[/]\nSTATUS: [red]Suspended[/][/]")
+                        {
+                            Border = BoxBorder.Rounded
+                        };
+                        result.HeaderAlignment(Justify.Center);
+                        result.Header($"[purple]Suspend: [white]{process.Id}[/][/]");
+                        AnsiConsole.Write(result);
                         isFinded = true;
                     }
+
                 }
                 catch (Exception error)
                 {
-                    Utilities.EntropyWrite(ConsoleColor.Red, $"Failed to suspend process >> {error.Message}");
+                    Console.ResetColor();
+                    Panel result = new($"[purple]STATUS: [white]Failed to suspend process[/]\nError: [red]{error.Message}[/][/]")
+                    {
+                        Border = BoxBorder.Rounded
+                    };
+                    result.HeaderAlignment(Justify.Center);
+                    result.Header("[purple]Suspend: [red]Error[/][/]");
+                    AnsiConsole.Write(result);
                     isFinded = true;
                 }
             }
             if (!isFinded)
             {
-                Utilities.EntropyWrite(ConsoleColor.Red, $"Process '{argument}' was not found");
+                Console.ResetColor();
+                Panel result = new($"[purple]Error: [red]Process '{argument}' was not found[/][/]")
+                {
+                    Border = BoxBorder.Rounded
+                };
+                result.HeaderAlignment(Justify.Center);
+                result.Header("[purple]Suspend: [red]Error[/][/]");
+                AnsiConsole.Write(result);
             }
             Console.Write("\n");
         }
@@ -323,9 +328,17 @@ namespace Entropy
             Console.Write("\n");
             if (argument == null)
             {
-                Utilities.EntropyWrite(ConsoleColor.Red, "No arguments given, please provide an argument, either <process.id> or <process.name>");
+                Console.ResetColor();
+                Panel result = new($"[purple]Error: [red]No arguments given, please provide an argument, either [green]<process.id>[/] or [green]<process.name>[/][/][/]")
+                {
+                    Border = BoxBorder.Rounded
+                };
+                result.HeaderAlignment(Justify.Center);
+                result.Header("[purple]Suspend: [red]Error[/][/]");
+                AnsiConsole.Write(result);
                 return;
             }
+
 
             var isFinded = false;
 
@@ -333,28 +346,43 @@ namespace Entropy
             {
                 try
                 {
-                    if (process.Id.ToString() == argument)
-                    {
-                        Utilities.EntropyUnsuspendProcess(int.Parse(argument));
-                        Utilities.EntropyWrite(ConsoleColor.Green, $"{process.Id}:::{process.ProcessName} >> unsuspended");
-                        isFinded = true;
-                    }
-                    if (process.ProcessName == argument)
+                    if (process.Id.ToString() == argument || process.ProcessName == argument)
                     {
                         Utilities.EntropyUnsuspendProcess(process.Id);
-                        Utilities.EntropyWrite(ConsoleColor.Green, $"{process.Id}:::{process.ProcessName} >> unsuspended");
+                        Console.ResetColor();
+                        Panel result = new($"[purple]ID: [white]{process.Id}[/]\nNAME: [white]{process.ProcessName}[/]\nSTATUS: [green]Working[/][/]")
+                        {
+                            Border = BoxBorder.Rounded
+                        };
+                        result.HeaderAlignment(Justify.Center);
+                        result.Header($"[purple]Unsuspend: [white]{process.Id}[/][/]");
+                        AnsiConsole.Write(result);
                         isFinded = true;
                     }
                 }
                 catch (Exception error)
                 {
-                    Utilities.EntropyWrite(ConsoleColor.Red, $"Failed to unsuspend process >> {error.Message}");
+                    Console.ResetColor();
+                    Panel result = new($"[purple]STATUS: [white]Failed to suspend process[/]\nError: [red]{error.Message}[/][/]")
+                    {
+                        Border = BoxBorder.Rounded
+                    };
+                    result.HeaderAlignment(Justify.Center);
+                    result.Header("[purple]Suspend: [red]Error[/][/]");
+                    AnsiConsole.Write(result);
                     isFinded = true;
                 }
             }
             if (!isFinded)
             {
-                Utilities.EntropyWrite(ConsoleColor.Red, $"Process '{argument}' was not found");
+                Console.ResetColor();
+                Panel result = new($"[purple]Error: [red]Process '{argument}' was not found[/][/]")
+                {
+                    Border = BoxBorder.Rounded
+                };
+                result.HeaderAlignment(Justify.Center);
+                result.Header("[purple]Suspend: [red]Error[/][/]");
+                AnsiConsole.Write(result);
             }
             Console.Write("\n");
         }
