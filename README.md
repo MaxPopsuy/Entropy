@@ -66,7 +66,7 @@ And with future versions and tons of my free time, there will be even more :)
 
 | VER | DESCRIPTION | STATUS |
 | --- | ----------- | ------ |
-| 1.0.0 | Main version for now | In Release |
+| 1.0.0 | 1.x.x Will now be LTS version for better experience | In Release |
 | 1.1.0 | Almost all work done for this version, expect release soon | Inwork |
 | 1.2.0 | There's some progress on version, but no further information | :x: |
 | 1.3.0 | In plans | :x: | 
