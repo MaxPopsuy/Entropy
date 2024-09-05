@@ -71,22 +71,23 @@ And with future versions and tons of my free time, there will be even more :)
 
 v1.1.0:
 
-- add ram/cpu/gpu usage to list of processes
 - finally make process list as a table
 - advanced find (?)
 - more advanced help command 
 
 v1.2.0:
 
-- add charts of ram/cpu/gpu usage
-- show detailed stats of your processes usage of ram/cpu/gpu
+- add ram/cpu/gpu usage to list of processes
 - more functions
 - advanced status function (i.e. sort by name/ram usage etc.)
 
 v1.3.0:
 
+- add charts of ram/cpu/gpu usage
 - add autostart commands
 - more commands and functions (?)
+- settings command
+- show detailed stats of your processes usage of ram/cpu/gpu
 
 v2.0.0:
 
