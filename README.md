@@ -85,8 +85,7 @@ v1.1.0:
 
 v1.2.0:
 
-- add ram/cpu/gpu usage to list of processes
-- Entropy.Panel / Entropy.Table for clean code
+- Entropy.Panel / Entropy.Table for cleaner code
 - more functions
 - advanced status function (i.e. sort by name/ram usage etc.)
 - more suspend/unsuspend functionality
@@ -95,6 +94,7 @@ v1.2.0:
 
 v1.3.0:
 
+- add ram/cpu/gpu usage to list of processes
 - add autostart commands
 - more commands and functions (?)
 - settings command
