@@ -80,6 +80,7 @@ v1.1.0:
 - more advanced help command
 - better terminal ui
 - better version handling
+- refactoring
 
 v1.2.0:
 
@@ -87,6 +88,7 @@ v1.2.0:
 - more functions
 - advanced status function (i.e. sort by name/ram usage etc.)
 - more suspend/unsuspend functionality
+- refactoring
 
 v1.3.0:
 
@@ -95,12 +97,14 @@ v1.3.0:
 - more commands and functions (?)
 - settings command
 - show detailed stats of your processes usage of ram/cpu/gpu
+- refactoring
 
 v2.0.0:
 
 - custom loader for user mods (?)
 - - so i think in theory, i can make some code to kinda "load" other files(e.g. "mods") into some point in code, but i think I'll only do this for custom themes, which you can change right in terminal itself
 - net scanner (?)
+- final refactioring
 
 
 
