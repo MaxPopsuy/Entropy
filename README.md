@@ -76,7 +76,8 @@ v1.1.0:
 
 - finally make process list as a table
 - advanced find (?)
-- more advanced help command 
+- more advanced help command
+- better terminal ui
 
 v1.2.0:
 
