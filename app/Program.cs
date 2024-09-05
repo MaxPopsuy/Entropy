@@ -19,7 +19,6 @@ class Program
 
             string? input = Console.ReadLine();
             string?[] output = input?.Split("&") ?? Array.Empty<string>();
-            //Entropy.Functions.HelpFunction(null, null);
             Console.ForegroundColor = ConsoleColor.DarkMagenta;
 
             foreach (string? raw in output)
@@ -36,10 +35,7 @@ class Program
                     firstArgument = inputArray[1];
                     secondArgument = inputArray[2];
                 }
-                catch
-                {
-                    //Console.WriteLine("Error have occured, please try again");
-                }
+                catch { }
                 if (!string.IsNullOrEmpty(command))
                 {
                     command = Utilities.EntropyGetCommandFromAlias(command);

@@ -6,7 +6,7 @@ namespace Entropy
 {
     public class Common
     {
-        public static string EntropyVersion = "1.0.0";
+        public static string EntropyVersion = "1.0.3";
     }
 
     public class Commands

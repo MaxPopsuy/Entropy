@@ -156,7 +156,6 @@ namespace Entropy
             {
                 Utilities.EntropyWrite(ConsoleColor.Red, $"No processes with this specific id or name were found");
             }
-            /*Console.WriteLine("\n");*/
         }
 
         public static void GetPathFunction(string argument, string _)
