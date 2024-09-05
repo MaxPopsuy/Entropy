@@ -1,7 +1,7 @@
 # Entropy - versatile and universal terminal task/process manager 
 
 
-![Current version: 1.0.3](https://img.shields.io/badge/ver-1.0.3-purple?style=for-the-badge&labelColor=222)
+![Current version: 1.0.3](https://img.shields.io/github/v/release/MaxPopsuy/Entropy?style=for-the-badge&labelColor=222&color=purple)
 ![Date created: 20.10.23](https://img.shields.io/badge/date%20created-20.10.23-purple?style=for-the-badge&labelColor=222)
 ![Last Commit](https://img.shields.io/github/last-commit/MaxPopsuy/Entropy/master?style=for-the-badge&labelColor=222&color=purple)
 
@@ -61,10 +61,12 @@ And with future versions and tons of my free time, there will be even more :)
 
 ## Future versions
 
+![DevVersion](https://img.shields.io/badge/dev%20version-1.1.0-purple?style=for-the-badge&labelColor=222)
+
 | VER | DESCRIPTION | STATUS |
 | --- | ----------- | ------ |
-| 1.0.0 | Current version as it is | In Release |
-| 1.1.0 | Some new content, but not much changed | Inwork |
+| 1.0.0 | Current version as is | In Release |
+| 1.1.0 | Almost all work done for this version, expect release soon | Inwork |
 | 1.2.0 | There's some progress on version, but no further information | :x: |
 | 1.3.0 | Also some progress | :x: | 
 | 2.0.0 | Major update | :x: |
@@ -114,4 +116,6 @@ v2.0.0:
 # Gallery
 ![ENTROPY](https://github.com/MaxPopsuy/Entropy/blob/master/images/entropy.png)
 ![ENTROPY](https://github.com/MaxPopsuy/Entropy/blob/master/images/entropy3.png)
+
+
 
