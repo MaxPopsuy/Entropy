@@ -86,6 +86,7 @@ v1.2.0:
 - add ram/cpu/gpu usage to list of processes
 - more functions
 - advanced status function (i.e. sort by name/ram usage etc.)
+- more suspend/unsuspend functionality
 
 v1.3.0:
 
