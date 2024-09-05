@@ -252,7 +252,7 @@ namespace Entropy
                     catch (Exception ex)
                     {
                         Console.ResetColor();
-                        Panel result = new($"ID:{process.Id}\nNAME:{process.ProcessName}\nERROR: [red]{ex.Message}[/]")
+                        Panel result = new($"ID: [white]{process.Id}[/]\nNAME: [white]{process.ProcessName}[/]\nERROR: [red]{ex.Message}[/]")
                         {
                             Border = BoxBorder.Rounded
                         };
@@ -266,7 +266,7 @@ namespace Entropy
             if (!isFinded)
             {
                 Console.ResetColor();
-                Panel result = new($"ARGUMENT: {argument}\nERROR:[red]Process not found[/]")
+                Panel result = new($"ARGUMENT: [white]{argument}[/]\nERROR:[red]Process not found[/]")
                 {
                     Border = BoxBorder.Rounded
                 };
