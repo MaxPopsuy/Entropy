@@ -15,7 +15,7 @@ namespace Entropy
         {
             ["help"] = ["", "shows every command and short description of them"],
             ["clear"] = ["", $"clears console. (aliases: clr, cls)"],
-            ["status"] = ["", "shows processes list. (aliases: ps, pl)"],
+            ["status"] = ["<mode>", "shows processes list. (aliases: ps, pl) (mode: d - for detailed, s - for short)"],
             ["terminate"] = ["<process.id> or <process.name>", "Terminates process by its name or id. (aliases: kill, kl, term)"],
             ["find"] = ["<process.id> or <process.name> / <mode>", "Finds the process with specific name or id and returns its status (mode: s - for strict, f - for flexible)"],
             ["getpath"] = ["<process.id> or <process.name>", "Gets the process path from id or name (aliases: gp)"],

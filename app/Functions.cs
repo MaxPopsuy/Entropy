@@ -7,6 +7,7 @@ using System.Threading;
 using System.Collections;
 using System.Collections.Specialized;
 using System.Dynamic;
+using System.Xml.Linq;
 
 namespace Entropy
 {
@@ -42,10 +43,11 @@ namespace Entropy
 
         public static void StatusFunction(string _, string __)
         {
+            Console.Write("\n");
+            Console.ResetColor();
             var status = Process.GetProcesses();
             var table = new Table().LeftAligned();
             table.Expand();
-
 
             table.AddColumn(new TableColumn("id").Centered());
             table.AddColumn(new TableColumn("name").LeftAligned());
@@ -83,6 +85,7 @@ namespace Entropy
 
         public static void TerminateFunction(string argument, string _)
         {
+            Console.Write("\n");
             if (argument != null)
             {
                 bool isFinded = false;
@@ -148,10 +151,12 @@ namespace Entropy
             {
                 Console.WriteLine("You didn't pass an argument, use the `terminate` command like this: `terminate <process.name>` or `terminate <process.pid>'\n");
             }
+            Console.Write("\n");
         }
 
         public static void FindFunction(string argument, string _)
         {
+            Console.Write("\n");
             var processes = Process.GetProcesses();
             var procArray = new List<int>();
 
@@ -176,12 +181,9 @@ namespace Entropy
                     if (int.TryParse(argument, out id) && process.Id == id || process.ProcessName.ToLower().Contains(argument.ToLower()))
                     {
                         procArray.Add(id);
-                        PerformanceCounter cpuCounter = new("Process", "% Processor Time", process.ProcessName);
-                        cpuCounter.NextValue();
-                        float cpuUsage = (int)cpuCounter.NextValue();
 
                         Console.ResetColor();
-                        Panel result = new($"ID:[white]{process.Id}[/]\nNAME:[white]{process.ProcessName}[/]\nSTATUS:[red]Suspended[/]\nRAM:[white]{process.PrivateMemorySize64 / 1000 / 1024} Mb[/]\nCPU:[white]{(cpuUsage <= 1 ? "<1" : cpuUsage)}%[/]")
+                        Panel result = new($"ID: [white]{process.Id}[/]\nNAME: [white]{process.ProcessName}[/]\nSTATUS: [red]Suspended[/]\nRAM: [white]{process.PrivateMemorySize64 / 1000 / 1024} Mb[/]")
                         {
                             Border = BoxBorder.Rounded
                         };
@@ -196,12 +198,9 @@ namespace Entropy
                     if (int.TryParse(argument, out id) && process.Id == id || process.ProcessName.ToLower().Contains(argument.ToLower()))
                     {
                         procArray.Add(id);
-                        PerformanceCounter cpuCounter = new("Process", "% Processor Time", process.ProcessName);
-                        cpuCounter.NextValue();
-                        float cpuUsage = (int)cpuCounter.NextValue();
 
                         Console.ResetColor();
-                        Panel result = new($"ID:[white]{process.Id}[/]\nNAME:[white]{process.ProcessName}[/]\nSTATUS:[green1]Working[/]\nRAM:[white]{process.PrivateMemorySize64 / 1000 / 1024} Mb[/]\nCPU:[white]{(cpuUsage <= 1 ? "<1" : cpuUsage)}%[/]")
+                        Panel result = new($"ID: [white]{process.Id}[/]\nNAME: [white]{process.ProcessName}[/]\nSTATUS: [green1]Working[/]\nRAM: [white]{process.PrivateMemorySize64 / 1000 / 1024} Mb[/]")
                         {
                             Border = BoxBorder.Rounded
                         };
@@ -222,11 +221,12 @@ namespace Entropy
                 result.Header("Find Result");
                 AnsiConsole.Write(result);
             }
-            /*Console.WriteLine("\n");*/
+            Console.WriteLine("\n");
         }
 
         public static void GetPathFunction(string argument, string _)
         {
+            Console.WriteLine();
             var processes = Process.GetProcesses();
             bool isFinded = false;
 
@@ -239,12 +239,12 @@ namespace Entropy
                         if (process != null && process.MainModule != null)
                         {
                             Console.ResetColor();
-                            Panel result = new($"ID:{process.Id}\nNAME:{process.ProcessName}\nPATH:[green1]{process.MainModule.FileName}[/]")
+                            Panel result = new($"ID: [white]{process.Id}[/]\nNAME: [white]{process.ProcessName}[/]\nPATH: [green1]{process.MainModule.FileName}[/]")
                             {
                                 Border = BoxBorder.Rounded
                             };
                             result.HeaderAlignment(Justify.Center);
-                            result.Header("GetPath result");
+                            result.Header($"GetPath: [white]{process.Id}[/]");
                             AnsiConsole.Write(result);
                             isFinded = true;
                         }
@@ -252,12 +252,12 @@ namespace Entropy
                     catch (Exception ex)
                     {
                         Console.ResetColor();
-                        Panel result = new($"ID:{process.Id}\nNAME:{process.ProcessName}\nERROR:[red]{ex.Message}[/]")
+                        Panel result = new($"ID:{process.Id}\nNAME:{process.ProcessName}\nERROR: [red]{ex.Message}[/]")
                         {
                             Border = BoxBorder.Rounded
                         };
                         result.HeaderAlignment(Justify.Center);
-                        result.Header("GetPath error");
+                        result.Header("GetPath: [red]Error[/]");
                         AnsiConsole.Write(result);
                         isFinded = true;
                     }
@@ -266,18 +266,20 @@ namespace Entropy
             if (!isFinded)
             {
                 Console.ResetColor();
-                Panel result = new($"ARGUMENT:{argument}\nERROR:[red]Process not found[/]")
+                Panel result = new($"ARGUMENT: {argument}\nERROR:[red]Process not found[/]")
                 {
                     Border = BoxBorder.Rounded
                 };
                 result.HeaderAlignment(Justify.Center);
-                result.Header("GetPath error");
+                result.Header("GetPath: [red]Error[/]");
                 AnsiConsole.Write(result);
             }
+            Console.WriteLine();
         }
 
         public static void SuspendFunction(string argument, string _)
         {
+            Console.Write("\n");
             if (argument == null)
             {
                 Utilities.EntropyWrite(ConsoleColor.Red, "No arguments given, please provide an argument, either <process.id> or <process.name>");
@@ -318,6 +320,7 @@ namespace Entropy
 
         public static void UnsuspendFunction(string argument, string _)
         {
+            Console.Write("\n");
             if (argument == null)
             {
                 Utilities.EntropyWrite(ConsoleColor.Red, "No arguments given, please provide an argument, either <process.id> or <process.name>");
