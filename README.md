@@ -66,10 +66,11 @@ And with future versions and tons of my free time, there will be even more :)
 
 | VER | DESCRIPTION | STATUS |
 | --- | ----------- | ------ |
-| 1.0.0 | Current version as is | In Release |
+| 1.0.0 | Main version for now | In Release |
 | 1.1.0 | Almost all work done for this version, expect release soon | Inwork |
 | 1.2.0 | There's some progress on version, but no further information | :x: |
-| 1.3.0 | Also some progress | :x: | 
+| 1.3.0 | In plans | :x: | 
+| 1.4.0 | In plans | :x: |
 | 2.0.0 | Major update | :x: |
 
 
@@ -98,6 +99,11 @@ v1.3.0:
 - settings command
 - show detailed stats of your processes usage of ram/cpu/gpu
 - refactoring
+
+v1.4.0:
+
+- themes
+- theme loader
 
 v2.0.0:
 
