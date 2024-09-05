@@ -25,7 +25,7 @@ namespace Entropy
 
         public static void ClearFunction(string _, string __)
         {
-            Console.Clear();
+            Console.Write("\f\u001bc\x1b[3J");
             Utilities.EntropyScreen();
         }
 
@@ -64,7 +64,7 @@ namespace Entropy
                     Console.ResetColor();
                 }
             }
-            Console.Write("\n");
+            Console.WriteLine();
         }
 
         public static void TerminateFunction(string argument, string _)
@@ -100,7 +100,7 @@ namespace Entropy
                 {
                     Utilities.EntropyWrite(ConsoleColor.Red, $"{argument} not found.");
                 }
-                Console.Write("\n");
+                Console.WriteLine();
             }
             else
             {
@@ -110,6 +110,7 @@ namespace Entropy
 
         public static void FindFunction(string argument, string _)
         {
+            Console.WriteLine();
             if (string.IsNullOrEmpty(argument))
             {
                 Utilities.EntropyWrite(ConsoleColor.Red, "Please provide an argument, either the process id or the process name \n");
@@ -156,10 +157,12 @@ namespace Entropy
             {
                 Utilities.EntropyWrite(ConsoleColor.Red, $"No processes with this specific id or name were found");
             }
+            Console.WriteLine();
         }
 
         public static void GetPathFunction(string argument, string _)
         {
+            Console.WriteLine();
             var processes = Process.GetProcesses();
 
             foreach (var process in processes)
@@ -179,10 +182,12 @@ namespace Entropy
                     }
                 }
             }
+            Console.WriteLine();
         }
 
         public static void SuspendFunction(string argument, string _)
         {
+            Console.WriteLine();
             if (argument == null)
             {
                 Utilities.EntropyWrite(ConsoleColor.Red, "No arguments given, please provide an argument, either <process.id> or <process.name>");
@@ -218,11 +223,12 @@ namespace Entropy
             {
                 Utilities.EntropyWrite(ConsoleColor.Red, $"Process '{argument}' was not found");
             }
-            Console.Write("\n");
+            Console.WriteLine();
         }
 
         public static void UnsuspendFunction(string argument, string _)
         {
+            Console.WriteLine();
             if (argument == null)
             {
                 Utilities.EntropyWrite(ConsoleColor.Red, "No arguments given, please provide an argument, either <process.id> or <process.name>");
@@ -258,7 +264,7 @@ namespace Entropy
             {
                 Utilities.EntropyWrite(ConsoleColor.Red, $"Process '{argument}' was not found");
             }
-            Console.Write("\n");
+            Console.WriteLine();
         }
     }
 }

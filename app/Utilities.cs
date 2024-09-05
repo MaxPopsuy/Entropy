@@ -12,7 +12,7 @@ namespace Entropy
 {
     internal class Utilities
     {
-        public static void EntropyScreen()
+        public static void EntropyScreen(bool help = false)
         {
             Console.ForegroundColor = ConsoleColor.DarkMagenta;
             Console.WriteLine($"███████╗███╗   ██╗████████╗██████╗  ██████╗ ██████╗ ██╗   ██╗");
@@ -22,7 +22,7 @@ namespace Entropy
             Console.WriteLine($"███████╗██║ ╚████║   ██║   ██║  ██║╚██████╔╝██║        ██║   ");
             Console.WriteLine($"╚══════╝╚═╝  ╚═══╝   ╚═╝   ╚═╝  ╚═╝ ╚═════╝ ╚═╝        ╚═╝   ");
 
-            Console.WriteLine("Write h or help for list of commands, welcome to entropy!");
+            Console.WriteLine(help ? "Write h or help for list of commands, welcome to entropy!" : null);
 
             Console.ResetColor();
         }

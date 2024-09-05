@@ -11,7 +11,7 @@ class Program
     public static void Main(string[] args)
     {
         Console.Title = "Entropy";
-        Utilities.EntropyScreen();
+        Utilities.EntropyScreen(true);
 
         while (true)
         {

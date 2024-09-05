@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Reflection;
 using System.Runtime.InteropServices;
 using static Entropy.Functions;
 
@@ -6,7 +7,8 @@ namespace Entropy
 {
     public class Common
     {
-        public static string EntropyVersion = "1.0.3";
+        public static string EntropyAssemblyVersion = Assembly.GetEntryAssembly().GetName().Version.ToString();
+        public static string EntropyVersion = EntropyAssemblyVersion.Substring(0, EntropyAssemblyVersion.Length - 2) + " LTS";
     }
 
     public class Commands
