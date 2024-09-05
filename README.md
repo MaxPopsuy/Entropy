@@ -45,7 +45,7 @@
 | 1.0.1   | Fixed minor and one major bug | In Release |
 | 1.0.2   | Minor bug fixes and project optimization | In Release |
 | 1.0.3   | Code cleanup and minor fixes | In Release |
-| 1.0.4   | Planned LTS version | In Progress |
+| 1.0.4   | LTS version | In Release |
 </details>
 
 ---
