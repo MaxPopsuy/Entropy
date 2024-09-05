@@ -4,6 +4,8 @@ using System.Diagnostics;
 using System.Diagnostics.Tracing;
 using System.Runtime.InteropServices;
 using static Entropy.Commands;
+using System.Dynamic;
+using System.Xml.Linq;
 
 class Program
 {
@@ -11,10 +13,11 @@ class Program
     public static void Main(string[] args)
     {
         Console.Title = "Entropy";
-        Utilities.EntropyScreen();
+        Utilities.EntropyScreen(true);
 
         while (true)
         {
+
             Utilities.EntropyWaitAnimation();
 
             string? input = Console.ReadLine();
