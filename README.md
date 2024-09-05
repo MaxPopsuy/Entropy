@@ -58,6 +58,7 @@ And with future versions and tons of my free time, there will be even more :)
 - Bugs with color of text
 - Bug with find function
 - Unexpected error for unknown reasons(probably because of find function)
+- Clear doesnt really "clear console"
 
 ## Future versions
 
