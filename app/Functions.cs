@@ -127,7 +127,7 @@ namespace Entropy
 
         public static void ClearFunction(string _, string __)
         {
-            Console.Clear();
+            Console.Write("\f\u001bc\x1b[3J");
             Utilities.EntropyScreen();
         }
 
