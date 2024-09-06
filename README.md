@@ -34,6 +34,29 @@
 
 ---
 
+## Releases Overview
+
+### Latest Release: [v1.1.0](https://github.com/MaxPopsuy/Entropy/releases/tag/v1.0.4-LTS-1)
+
+- **Date Released**: 06.09.24
+- **Changes**:
+  - Improved process list formatting
+  - Advanced find functionality
+  - Enhanced help command
+  - Better terminal UI
+  - Improved version handling
+  - Refactoring for cleaner and more efficient code
+
+### LTS Release: [v1.0.4](https://github.com/MaxPopsuy/Entropy/releases/tag/v1.0.4-LTS-1)
+
+- **Date Released**: 05.09.24
+- **Changes**:
+  - Marked as Long-Term Support (LTS) version
+  - Minor bug fixes and performance enhancements
+  - Code cleanup for stability
+
+---
+
 ## Version Logs
 
 <details>
