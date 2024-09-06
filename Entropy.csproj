@@ -7,7 +7,7 @@
     <Nullable>enable</Nullable>
     <PublishSingleFile>true</PublishSingleFile>
     <SelfContained>true</SelfContained>
-    <Version>1.0.3</Version>
+    <Version>1.1.0</Version>
     <RuntimeIdentifier>win-x64</RuntimeIdentifier>
     <PublishReadyToRun>true</PublishReadyToRun>
     <PublishTrimmed>true</PublishTrimmed>
@@ -19,5 +19,15 @@
   <ItemGroup>
     <Content Include="entropy2.ico" />
   </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Spectre.Console" Version="0.47.0" />
+    <PackageReference Include="System.Diagnostics.PerformanceCounter" Version="7.0.0" />
+  </ItemGroup>
+
+     
+  
+  
+
 
 </Project>

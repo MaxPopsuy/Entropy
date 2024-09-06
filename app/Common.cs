@@ -6,21 +6,21 @@ namespace Entropy
 {
     public class Common
     {
-        public static string EntropyVersion = "1.0.3";
+        public static string EntropyVersion = "1.1.0";
     }
 
     public class Commands
     {
-        public static Dictionary<string, string[]> _commandsDsc = new() // string[] = ["arguments", "description"]
+        public static Dictionary<string, string[]> _commandsDsc = new() // string[] = ["parameters", "description"]
         {
-            ["help"] = ["", "shows every command and short description of them"],
-            ["clear"] = ["", $"clears console. (aliases: clr, cls)"],
-            ["status"] = ["", "shows processes list. (aliases: ps, pl)"],
-            ["terminate"] = ["<process.id> or <process.name>", "Terminates process by its name or id. (aliases: kill, kl, term)"],
-            ["find"] = ["<process.id> or <process.name>", "Finds the process with specific name or id and returns its status"],
-            ["getpath"] = ["<process.id> or <process.name>", "Gets the process path from id or name (aliases: gp)"],
-            ["suspend"] = ["<process.id> or <process.name>", "Suspends the process from id or name (aliases: sp, spnd)"],
-            ["unsuspend"] = ["<process.id> or <process.name>", "Unsuspends the process from id or name (aliases: uns, us)"]
+            ["help"] = ["<mode> / <command>", "Displays help information for all commands or a specific command. <mode>: 'd' for detailed and 's' for short"],
+            ["clear"] = ["", "Clears the console screen."],
+            ["status"] = ["<mode>", "Lists all running processes. Use `<mode>`: `d` for detailed view, `s` for short summary."],
+            ["terminate"] = ["<process.id> | <process.name>", "Stops a process by its ID or name."],
+            ["find"] = ["<process.id> | <process.name> / <mode>", "Finds a process by name or ID and shows its status. Use `<mode>`: `s` for strict, `f` for flexible matching."],
+            ["getpath"] = ["<process.id> | <process.name>", "Displays the executable path of a specified process by its ID or name."],
+            ["suspend"] = ["<process.id> | <process.name>", "Pauses a process by its ID or name."],
+            ["unsuspend"] = ["<process.id> | <process.name>", "Resumes a suspended process by its ID or name."]
         };
 
         public static Dictionary<string, string[]> _commandsAliases = new()
@@ -29,7 +29,7 @@ namespace Entropy
             ["clear"] = ["clr", "cls"],
             ["status"] = ["ps", "pl"],
             ["terminate"] = ["kill", "kl", "term"],
-            ["find"] = [],
+            ["find"] = ["f"],
             ["getpath"] = ["gp"],
             ["suspend"] = ["sp", "spnd"],
             ["unsuspend"] = ["uns", "us"]
