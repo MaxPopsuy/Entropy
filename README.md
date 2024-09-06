@@ -36,7 +36,7 @@
 
 ## Releases Overview
 
-### Latest Release: [v1.1.0](https://github.com/MaxPopsuy/Entropy/releases/tag/v1.0.4-LTS-1)
+### Latest Release: [v1.1.0](https://github.com/MaxPopsuy/Entropy/releases/tag/v1.1.0)
 
 - **Date Released**: 06.09.24
 - **Changes**:
@@ -69,6 +69,8 @@
 | 1.0.2   | Minor bug fixes and project optimization | In Release |
 | 1.0.3   | Code cleanup and minor fixes | In Release |
 | 1.0.4   | LTS version | In Release |
+| | | |
+| 1.1.0 | Improved ui, help find functions as well as some bugfixes | In Release |
 </details>
 
 ---
@@ -90,24 +92,15 @@
 
 ## Future Versions
 
-![DevVersion](https://img.shields.io/badge/dev%20version-1.1.0-purple?style=for-the-badge&labelColor=222)
+![DevVersion](https://img.shields.io/badge/dev%20version-1.1.X-purple?style=for-the-badge&labelColor=222)
 
 | VERSION | DESCRIPTION | STATUS |
 | ------- | ----------- | ------ |
-| 1.1.0   | Significant updates nearing release | In Progress |
+| 1.1.0   | Significant updates for some functions, ui and bug fixes | In Release now |
 | 1.2.0   | Ongoing development with no detailed information yet | Planned |
 | 1.3.0   | Planned updates | Planned |
 | 1.4.0   | Planned updates | Planned |
 | 2.0.0   | Major update and potential LTS version | Planned |
-
-### v1.1.0
-
-- Improved process list formatting
-- Advanced find functionality
-- Enhanced help command
-- Better terminal UI
-- Improved version handling
-- Refactoring
 
 ### v1.2.0
 
