@@ -43,7 +43,7 @@ namespace Entropy
 
         public static void StatusFunction(string _, string __)
         {
-            Console.Write("\n");
+            Console.WriteLine();
             Console.ResetColor();
             var status = Process.GetProcesses();
             var table = new Table().LeftAligned();
@@ -80,7 +80,7 @@ namespace Entropy
                 }
             }
             AnsiConsole.Write(table);
-            Console.Write("\n");
+            Console.WriteLine();
         }
 
         public static void TerminateFunction(string argument, string _)
@@ -133,19 +133,24 @@ namespace Entropy
                     AnsiConsole.Write(result);
                 }
             }
-            Console.Write("\n");
+            Console.WriteLine();
         }
 
-        public static void FindFunction(string argument, string _)
+        public static void FindFunction(string argument, string mode)
         {
-            Console.Write("\n");
             var processes = Process.GetProcesses();
             var procArray = new List<int>();
 
             foreach (var process in processes)
             {
                 var isSuspended = false;
+                bool processMatches = mode == "s" ? process.ProcessName.Equals(argument)
+                                          : process.ProcessName.ToLower().Contains(argument.ToLower());
 
+                if (!processMatches)
+                {
+                    continue;
+                }
 
                 foreach (ProcessThread thread in process.Threads)
                 {
@@ -157,45 +162,27 @@ namespace Entropy
                     }
                 }
 
-                if (isSuspended)
-                {
-                    int id;
-                    if (int.TryParse(argument, out id) && process.Id == id || process.ProcessName.ToLower().Contains(argument.ToLower()))
-                    {
-                        procArray.Add(id);
+                int id;
+                bool isIdMatches = int.TryParse(argument, out id) && process.Id == id;
 
-                        Console.ResetColor();
-                        Panel result = new($"ID: [white]{process.Id}[/]\nNAME: [white]{process.ProcessName}[/]\nSTATUS: [red]Suspended[/]\nRAM: [white]{process.PrivateMemorySize64 / 1000 / 1024} Mb[/]")
-                        {
-                            Border = BoxBorder.Rounded
-                        };
-                        result.HeaderAlignment(Justify.Center);
-                        result.Header($"Find: [white]{process.Id}[/]");
-                        AnsiConsole.Write(result);
-                    }
-                }
-                else
+                if (processMatches || isIdMatches)
                 {
-                    int id;
-                    if (int.TryParse(argument, out id) && process.Id == id || process.ProcessName.ToLower().Contains(argument.ToLower()))
-                    {
-                        procArray.Add(id);
+                    procArray.Add(process.Id);
+                    string statusText = isSuspended ? "[red]Suspended[/]" : "[green1]Working[/]";
 
-                        Console.ResetColor();
-                        Panel result = new($"ID: [white]{process.Id}[/]\nNAME: [white]{process.ProcessName}[/]\nSTATUS: [green1]Working[/]\nRAM: [white]{process.PrivateMemorySize64 / 1000 / 1024} Mb[/]")
-                        {
-                            Border = BoxBorder.Rounded
-                        };
-                        result.HeaderAlignment(Justify.Center);
-                        result.Header($"Find: [white]{process.Id}[/]");
-                        AnsiConsole.Write(result);
-                    }
+                    Panel result = new($"ID: [white]{process.Id}[/]\nNAME: [white]{process.ProcessName}[/]\nSTATUS: {statusText}\nRAM: [white]{process.PrivateMemorySize64 / 1024 / 1024} Mb[/]")
+                    {
+                        Border = BoxBorder.Rounded
+                    };
+                    result.HeaderAlignment(Justify.Center);
+                    result.Header($"Find: [white]{process.Id}[/]");
+                    AnsiConsole.Write(result);
                 }
             }
             if (procArray.Count == 0)
             {
                 Console.ResetColor();
-                Panel result = new("[red]No processes with this specific id or name were found[/]")
+                Panel result = new("[red]No processes with this specific ID or name were found[/]")
                 {
                     Border = BoxBorder.Rounded
                 };
@@ -203,6 +190,7 @@ namespace Entropy
                 result.Header("Find Result");
                 AnsiConsole.Write(result);
             }
+
             Console.WriteLine();
         }
 
@@ -261,7 +249,7 @@ namespace Entropy
 
         public static void SuspendFunction(string argument, string _)
         {
-            Console.Write("\n");
+            Console.WriteLine();
             if (argument == null)
             {
                 Console.ResetColor();
@@ -320,12 +308,12 @@ namespace Entropy
                 result.Header("[purple]Suspend: [red]Error[/][/]");
                 AnsiConsole.Write(result);
             }
-            Console.Write("\n");
+            Console.WriteLine();
         }
 
         public static void UnsuspendFunction(string argument, string _)
         {
-            Console.Write("\n");
+            Console.WriteLine();
             if (argument == null)
             {
                 Console.ResetColor();
@@ -384,7 +372,7 @@ namespace Entropy
                 result.Header("[purple]Suspend: [red]Error[/][/]");
                 AnsiConsole.Write(result);
             }
-            Console.Write("\n");
+            Console.WriteLine();
         }
     }
 }
