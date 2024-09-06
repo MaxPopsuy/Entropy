@@ -64,7 +64,6 @@
 - Inconsistent text coloring
 - Problems with the find function
 - Unexpected errors likely related to the find function
-- The "clear" command does not fully clear the console
 
 ## Future Versions
 
@@ -93,28 +92,27 @@
 - Additional functions
 - Advanced status features (e.g., sorting by name or RAM usage)
 - Enhanced suspend/unsuspend functionality
-- Added RAM/CPU/GPU usage to process list
+- Add RAM/CPU/GPU usage to process list, find etc (probably will be experimental feature till next lts release)
+- Settings command
+- Autostart system
 - Refactoring
 
 ### v1.3.0
 
-- Display RAM/CPU/GPU usage in process list
-- Add autostart commands
 - Additional commands and functions
-- Settings command
 - Detailed stats for RAM/CPU/GPU usage
 - Refactoring
 
 ### v1.4.0
 
-- Charts for RAM/CPU/GPU usage
+- Charts for RAM/CPU/GPU usage (will be available ass experimental feature in previous versions)
 - Themes and theme loader
 
 ### v2.0.0
 
 - Custom loader for user mods
 - Potential net scanner
-- Final refactoring
+- Final refactoring and last LTS release
 
 ---
 
