@@ -116,6 +116,8 @@
 ### v1.3.0
 
 - Additional commands and functions
+- Advanced settings features (such as saving to file/loading from file and folder for this)
+- Logging system (for development and testing, experimental)
 - Detailed stats for RAM/CPU/GPU usage
 - Refactoring
 
