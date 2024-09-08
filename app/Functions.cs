@@ -8,6 +8,7 @@ using System.Collections;
 using System.Collections.Specialized;
 using System.Dynamic;
 using System.Xml.Linq;
+using System.Text;
 
 namespace Entropy
 {
@@ -464,6 +465,216 @@ namespace Entropy
                 AnsiConsole.Write(result);
             }
             Console.WriteLine();
+        }
+        public static void SettingsFunction(string _, string __)
+        {
+            SettingsManager.InitializeSettings();
+            var settings = SettingsManager.LoadSettings();
+            Console.ResetColor();
+
+            while (true)
+            {
+                AnsiConsole.Write(
+                    new Panel($"[purple]Current Settings:\n\n{GetSettingsDisplay(settings)}[/]")
+                    .Header("[white]Entropy Settings[/]")
+                    .Border(BoxBorder.Square).HeaderAlignment(Justify.Center)
+                );
+
+                var choice = AnsiConsole.Prompt(new SelectionPrompt<string>()
+                    .Title("[purple]Select a setting to change:[/]")
+                    .AddChoices(GetSettingsNames())
+                    .HighlightStyle(Spectre.Console.Color.Fuchsia)
+                    .PageSize(15)
+                );
+
+
+                if (choice == "Exit" | choice == "")
+                {
+                    break;
+                }
+
+                var property = typeof(Settings).GetProperty(choice);
+                if (property == null)
+                {
+                    AnsiConsole.MarkupLine($"[red]Setting '{choice}' not found.[/]");
+                    continue;
+                }
+
+                var settingType = property.PropertyType;
+
+                if (settingType.IsEnum)
+                {
+                    var enumType = settingType;
+                    var enumValues = Enum.GetNames(enumType);
+                    UpdateEnumSetting(settings, choice, enumValues, enumType);
+                }
+                else
+                {
+                    switch (Type.GetTypeCode(settingType))
+                    {
+                        case TypeCode.Boolean:
+                            UpdateBoolSetting(settings, choice);
+                            break;
+
+                        case TypeCode.Int32:
+                            UpdateIntSetting(settings, choice);
+                            break;
+
+                        case TypeCode.String:
+                            UpdateStringSetting(settings, choice);
+                            break;
+
+                        default:
+                            AnsiConsole.MarkupLine($"[red]Unsupported setting type '{settingType.Name}' for setting '{choice}'.[/]");
+                            break;
+                    }
+                }
+
+
+                SettingsManager.SaveSettings(settings);
+                AnsiConsole.MarkupLine("[green]Settings updated successfully![/]");
+            }
+            Console.WriteLine();
+        }
+
+        private static string GetSettingsDisplay(Settings settings)
+        {
+            var display = new StringBuilder();
+            foreach (var prop in typeof(Settings).GetProperties())
+            {
+                var value = prop.GetValue(settings);
+                var displayName = prop.Name;
+
+                bool isExperimental = prop.Name.Contains("Experimental", StringComparison.OrdinalIgnoreCase) ||
+                                      (value != null && value.ToString().Contains("Experimental", StringComparison.OrdinalIgnoreCase));
+                bool isPlaceholder = prop.Name.Contains("PH", StringComparison.OrdinalIgnoreCase) ||
+                                     (value != null && value.ToString().Contains("Placeholder", StringComparison.OrdinalIgnoreCase));
+
+                if (isExperimental && isPlaceholder)
+                {
+                    displayName = "{PH} {EXP} " + displayName;
+                }
+                else if (isExperimental)
+                {
+                    displayName = "{EXP} " + displayName;
+                }
+                else if (isPlaceholder)
+                {
+                    displayName = "{PH} " + displayName;
+                }
+
+                display.AppendLine($"{displayName}: [white]{value}[/]");
+            }
+            return display.ToString();
+        }
+
+
+        private static IEnumerable<string> GetSettingsNames()
+        {
+            var settingsNames = new List<string>();
+
+            foreach (var prop in typeof(Settings).GetProperties())
+            {
+                var tags = GetPropertyTags(prop.Name);
+                settingsNames.Add($"{tags}{prop.Name}");
+            }
+
+            settingsNames.Add("");
+            settingsNames.Add("Exit");
+
+            return settingsNames;
+        }
+
+        private static string GetPropertyTags(string propertyName)
+        {
+            var tags = string.Empty;
+
+            if (propertyName.Contains("PH", StringComparison.OrdinalIgnoreCase))
+            {
+                tags += "{PH} ";
+            }
+
+            if (propertyName.Contains("Experimental", StringComparison.OrdinalIgnoreCase))
+            {
+                tags += "{EXP} ";
+            }
+
+            return tags;
+        }
+
+        private static void UpdateEnumSetting(Settings settings, string settingName, string[] enumValues, Type enumType)
+        {
+            var choices = enumValues.Select((value, index) => $"{index}: {value}").Append("").Append("Exit").ToArray();
+            var selectedEnumValue = AnsiConsole.Prompt(
+                new SelectionPrompt<string>()
+                    .Title($"[purple]Select new value for '{settingName}':[/]")
+                    .AddChoices(choices)
+                    .HighlightStyle(Spectre.Console.Color.Fuchsia)
+            );
+
+            if (selectedEnumValue == "Exit" | selectedEnumValue == "")
+            {
+                return;
+            }
+
+            if (int.TryParse(selectedEnumValue.Split(":")[0], out var index) && index >= 0 && index < enumValues.Length)
+            {
+                var enumName = enumValues[index];
+                if (Enum.TryParse(enumType, enumName, true, out var newEnumValue))
+                {
+                    var property = typeof(Settings).GetProperty(settingName);
+                    property?.SetValue(settings, newEnumValue);
+                }
+                else
+                {
+                    AnsiConsole.MarkupLine($"[red]Invalid enum value '{enumName}' for setting '{settingName}'.[/]");
+                }
+            }
+            else
+            {
+                AnsiConsole.MarkupLine($"[red]Invalid selection '{selectedEnumValue}' for setting '{settingName}'.[/]");
+            }
+        }
+
+        private static void UpdateBoolSetting(Settings settings, string settingName)
+        {
+            var choices = new[] { "True", "False", "", "Exit" };
+            var currentValue = (bool)typeof(Settings).GetProperty(settingName)?.GetValue(settings);
+            var selectedChoice = AnsiConsole.Prompt(
+                new SelectionPrompt<string>()
+                    .Title($"[purple]Enable {settingName}?[/]")
+                    .AddChoices(choices)
+                    .PageSize(4)
+                    .HighlightStyle(Spectre.Console.Color.Fuchsia)
+            );
+
+            if (selectedChoice == "Exit" | selectedChoice == "")
+            {
+                return;
+            }
+
+            var newValue = selectedChoice == "True";
+            typeof(Settings).GetProperty(settingName)?.SetValue(settings, newValue);
+        }
+
+        private static void UpdateIntSetting(Settings settings, string settingName)
+        {
+            var currentValue = (int)typeof(Settings).GetProperty(settingName)?.GetValue(settings);
+            var newValue = AnsiConsole.Prompt(
+                new TextPrompt<int>($"[purple]Enter new value for {settingName}:[/]").DefaultValue(currentValue)
+            );
+
+            typeof(Settings).GetProperty(settingName)?.SetValue(settings, newValue);
+        }
+
+        private static void UpdateStringSetting(Settings settings, string settingName)
+        {
+            var currentValue = (string)typeof(Settings).GetProperty(settingName)?.GetValue(settings);
+            var newValue = AnsiConsole.Prompt(
+                new TextPrompt<string>($"[purple]Enter new value for {settingName}:[/]").DefaultValue(currentValue)
+            );
+
+            typeof(Settings).GetProperty(settingName)?.SetValue(settings, newValue);
         }
     }
 }

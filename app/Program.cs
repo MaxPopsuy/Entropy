@@ -14,6 +14,8 @@ class Program
     {
         Console.Title = "Entropy";
         Utilities.EntropyScreen(true);
+        //SettingsManager.InitializeSettings();
+        SettingsManager.LoadSettings();
 
         while (true)
         {

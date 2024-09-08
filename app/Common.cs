@@ -22,7 +22,8 @@ namespace Entropy
             ["find"] = ["<process.id> | <process.name> / <mode>", "Finds a process by name or ID and shows its status. Use `<mode>`: `s` for strict, `f` for flexible matching."],
             ["getpath"] = ["<process.id> | <process.name>", "Displays the executable path of a specified process by its ID or name."],
             ["suspend"] = ["<process.id> | <process.name>", "Pauses a process by its ID or name."],
-            ["unsuspend"] = ["<process.id> | <process.name>", "Resumes a suspended process by its ID or name."]
+            ["unsuspend"] = ["<process.id> | <process.name>", "Resumes a suspended process by its ID or name."],
+            ["settings"] = ["<option>", "[red]EXPERIMENTAL[/]Modifies or displays application settings. Use `<key>` and `<value>` to change settings directly or `<option>`: `show` to view all settings."]
         };
 
         public static Dictionary<string, string[]> _commandsAliases = new()
@@ -34,7 +35,8 @@ namespace Entropy
             ["find"] = ["f"],
             ["getpath"] = ["gp"],
             ["suspend"] = ["sp", "spnd"],
-            ["unsuspend"] = ["uns", "us"]
+            ["unsuspend"] = ["uns", "us"],
+            ["settings"] = ["s", "set"]
         };
 
 
@@ -48,6 +50,7 @@ namespace Entropy
             ["getpath"] = GetPathFunction,
             ["suspend"] = SuspendFunction,
             ["unsuspend"] = UnsuspendFunction,
+            ["settings"] = SettingsFunction
         };
     }
 
