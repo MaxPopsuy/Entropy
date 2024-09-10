@@ -73,13 +73,15 @@ namespace Entropy
                 Table helpTable = new Table().Centered().Expand();
                 helpTable.Border = TableBorder.Double;
 
-                helpTable.AddColumn(new TableColumn("COMMAND").Centered());
+                helpTable.AddColumn(new TableColumn("COMMAND").Centered()).Alignment(Justify.Center);
                 helpTable.AddColumn(new TableColumn("PARAMS").Centered());
                 helpTable.AddColumn(new TableColumn("ALIASES").Centered());
+                helpTable.Alignment(Justify.Center);
 
                 if (mode == "detailed")
                 {
                     helpTable.AddColumn(new TableColumn("DESCRIPTION").Centered());
+                    helpTable.Alignment(Justify.Center);
                 }
 
                 helpTable.Columns[0].Padding(2, 10);
@@ -545,24 +547,6 @@ namespace Entropy
                 var value = prop.GetValue(settings);
                 var displayName = prop.Name;
 
-                bool isExperimental = prop.Name.Contains("Experimental", StringComparison.OrdinalIgnoreCase) ||
-                                      (value != null && value.ToString().Contains("Experimental", StringComparison.OrdinalIgnoreCase));
-                bool isPlaceholder = prop.Name.Contains("PH", StringComparison.OrdinalIgnoreCase) ||
-                                     (value != null && value.ToString().Contains("Placeholder", StringComparison.OrdinalIgnoreCase));
-
-                if (isExperimental && isPlaceholder)
-                {
-                    displayName = "{PH} {EXP} " + displayName;
-                }
-                else if (isExperimental)
-                {
-                    displayName = "{EXP} " + displayName;
-                }
-                else if (isPlaceholder)
-                {
-                    displayName = "{PH} " + displayName;
-                }
-
                 display.AppendLine($"{displayName}: [white]{value}[/]");
             }
             return display.ToString();
@@ -583,23 +567,6 @@ namespace Entropy
             settingsNames.Add("Exit");
 
             return settingsNames;
-        }
-
-        private static string GetPropertyTags(string propertyName)
-        {
-            var tags = string.Empty;
-
-            if (propertyName.Contains("PH", StringComparison.OrdinalIgnoreCase))
-            {
-                tags += "{PH} ";
-            }
-
-            if (propertyName.Contains("Experimental", StringComparison.OrdinalIgnoreCase))
-            {
-                tags += "{EXP} ";
-            }
-
-            return tags;
         }
 
         private static void UpdateEnumSetting(Settings settings, string settingName, string[] enumValues, Type enumType)
