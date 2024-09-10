@@ -559,8 +559,7 @@ namespace Entropy
 
             foreach (var prop in typeof(Settings).GetProperties())
             {
-                var tags = GetPropertyTags(prop.Name);
-                settingsNames.Add($"{tags}{prop.Name}");
+                settingsNames.Add(prop.Name);
             }
 
             settingsNames.Add("");
