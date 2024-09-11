@@ -1,6 +1,6 @@
 # Entropy - Versatile and Universal Terminal Task/Process Manager
 
-![Current version: 1.0.3](https://img.shields.io/github/v/release/MaxPopsuy/Entropy?style=for-the-badge&labelColor=222&color=purple)
+![Current version](https://img.shields.io/github/v/release/MaxPopsuy/Entropy?style=for-the-badge&labelColor=222&color=purple)
 ![Date created: 20.10.23](https://img.shields.io/badge/date%20created-20.10.23-purple?style=for-the-badge&labelColor=222)
 ![Last Commit](https://img.shields.io/github/last-commit/MaxPopsuy/Entropy/master?style=for-the-badge&labelColor=222&color=purple)
 
