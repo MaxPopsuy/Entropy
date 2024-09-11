@@ -12,7 +12,7 @@
     <PublishReadyToRun>true</PublishReadyToRun>
     <PublishTrimmed>true</PublishTrimmed>
     <LangVersion>preview</LangVersion>
-    <ApplicationIcon>entropy2.ico</ApplicationIcon>
+    <ApplicationIcon>entropy3.ico</ApplicationIcon>
     <TrimMode>link</TrimMode>
   </PropertyGroup>
 
