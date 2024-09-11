@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using Entropy;
 using Spectre.Console;
+using static Entropy.AutostartManager;
 
 namespace Entropy
 {
@@ -101,6 +103,12 @@ namespace Entropy
             string json = JsonSerializer.Serialize(settings, new JsonSerializerOptions { WriteIndented = true });
             File.WriteAllText(settingsFilePath, json);
         }
+        public static object GetSettingValue(Settings settings, string propertyName)
+        {
+            var propertyInfo = typeof(Settings).GetProperty(propertyName);
+            Console.WriteLine(propertyInfo.GetValue(propertyName).ToString());
+            return propertyInfo != null ? propertyInfo.GetValue(settings) : null;
+        }
 
         private static Settings ValidateSettings(Settings settings)
         {
@@ -125,10 +133,12 @@ namespace Entropy
     [JsonSerializable(typeof(Settings))]
     public class Settings
     {
-        // Program specific
-        public bool PHAutoStart { get; set; } = false;
+        // Generic
+        public bool AutoStart { get; set; } = false;
         public bool PHCheckForUpdates { get; set; } = true;
         public bool PHAutoUpdate { get; set; } = false;
+        public bool DisplayVersionUpdateMessage { get; set; } = true;
+        public bool DisplayLTSUpdateMessage { get; set; } = true;
 
         // Functions
         // EXPERIMENTAL
@@ -141,5 +151,36 @@ namespace Entropy
 
         // UI
         public InterfaceModeEnum PHInterfaceMode { get; set; } = InterfaceModeEnum.Generic;
+    }
+    public static class SettingsActions
+    {
+        public static void ExperimentalTheme()
+        {
+            AnsiConsole.MarkupLine("[green]Checking for updates...[/]");
+            Task.Delay(1000).Wait();
+            AnsiConsole.MarkupLine("[green]Update check completed![/]");
+        }
+
+        public static void HandleCheckForUpdates(bool value)
+        {
+            AnsiConsole.MarkupLine("[green]Checking for updates...[/]");
+            Task.Delay(1000).Wait();
+            AnsiConsole.MarkupLine("[green]Update check completed![/]");
+        }
+        public static void HandleAutoUpdate(bool value)
+        {
+            throw new NotImplementedException();
+        }
+        public static void HandleAutoStart(bool enable)
+        {
+            if (enable)
+            {
+                AutostartManager.EnableAutoStart();
+            }
+            else
+            {
+                AutostartManager.DisableAutoStart();
+            }
+        }
     }
 }

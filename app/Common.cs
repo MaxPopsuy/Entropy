@@ -1,14 +1,58 @@
 ﻿using System;
 using System.Reflection;
 using System.Runtime.InteropServices;
+using System.Xml.Linq;
+using static Entropy.Attributes;
 using static Entropy.Functions;
+using static Entropy.SettingsActions;
+using static Entropy.Utilities;
 
 namespace Entropy
 {
     public class Common
     {
+        public XDocument doc = XDocument.Load("Entropy.csproj");
+
+
         public static string EntropyAssemblyVersion = Assembly.GetEntryAssembly().GetName().Version.ToString();
-        public static string EntropyVersion = EntropyAssemblyVersion.Substring(0, EntropyAssemblyVersion.Length - 2);
+        public static bool EntropyIsLTS = bool.Parse(Assembly.GetEntryAssembly().GetCustomAttribute<IsLTSAttribute>().IsLTS);
+        public static int EntropyLTSBuild = Int32.Parse(Assembly.GetEntryAssembly().GetCustomAttribute<LTSBuildAttribute>().LTSBuild);
+
+        public static string EntropyVersionA = EntropyAssemblyVersion.Substring(0, EntropyAssemblyVersion.Length - 2);
+        public static string EntropyVersion = Utilities.EntropyGetVersion(EntropyVersionA, EntropyIsLTS, EntropyLTSBuild);
+        public const string EntropyName = "Entropy";
+    }
+
+    public class Attributes
+    {
+        [AttributeUsage(AttributeTargets.Assembly)]
+        public class IsLTSAttribute : Attribute
+        {
+            public string IsLTS { get; set; }
+            public IsLTSAttribute(string value)
+            {
+                IsLTS = value;
+            }
+        }
+        public class LTSBuildAttribute : Attribute
+        {
+            public string LTSBuild { get; set; }
+            public LTSBuildAttribute(string value)
+            {
+                LTSBuild = value;
+            }
+        }
+
+    }
+
+    public class SettingsCommon
+    {
+        internal static readonly Dictionary<string, Action<object>> settingsActions = new Dictionary<string, Action<object>>
+        {
+            { nameof(Settings.AutoStart), value => HandleAutoStart((bool)value) },
+            { nameof(Settings.PHCheckForUpdates), value => HandleCheckForUpdates((bool)value) },
+            { nameof(Settings.PHAutoUpdate), value => HandleAutoUpdate((bool)value) }
+        };
     }
 
     public class Commands

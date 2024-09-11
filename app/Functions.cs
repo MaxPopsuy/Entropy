@@ -9,6 +9,8 @@ using System.Collections.Specialized;
 using System.Dynamic;
 using System.Xml.Linq;
 using System.Text;
+using static Entropy.SettingsCommon;
+using static Entropy.SettingsManager;
 
 namespace Entropy
 {
@@ -468,6 +470,7 @@ namespace Entropy
             }
             Console.WriteLine();
         }
+
         public static void SettingsFunction(string _, string __)
         {
             SettingsManager.InitializeSettings();
@@ -508,7 +511,8 @@ namespace Entropy
                 {
                     var enumType = settingType;
                     var enumValues = Enum.GetNames(enumType);
-                    UpdateEnumSetting(settings, choice, enumValues, enumType);
+
+                    UpdateEnumSetting(settings, choice, enumValues, enumType);     
                 }
                 else
                 {
@@ -532,6 +536,10 @@ namespace Entropy
                     }
                 }
 
+                if (settingsActions.TryGetValue(choice, out var action))
+                {
+                    action(property.GetValue(settings));
+                }
 
                 SettingsManager.SaveSettings(settings);
                 AnsiConsole.MarkupLine("[green]Settings updated successfully![/]");

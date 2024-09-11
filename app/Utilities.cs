@@ -22,7 +22,7 @@ namespace Entropy
             Console.WriteLine($"███████╗██║ ╚████║   ██║   ██║  ██║╚██████╔╝██║        ██║   ");
             Console.WriteLine($"╚══════╝╚═╝  ╚═══╝   ╚═╝   ╚═╝  ╚═╝ ╚═════╝ ╚═╝        ╚═╝   ");
 
-            Console.WriteLine(help ? "Write h or help for list of commands, welcome to entropy!" : null);
+            Console.WriteLine(help ? "Write h or help for list of commands, welcome to Entropy!" : null);
 
             Console.ResetColor();
         }
@@ -106,6 +106,31 @@ namespace Entropy
                 } while (suspendCount > 0);
 
                 CloseHandle(processOpenThread);
+            }
+        }
+
+        public static string EntropyGetVersion(string baseVersion, bool isLTS, int? ltsBuild)
+        {
+            if (string.IsNullOrEmpty(baseVersion))
+            {
+                throw new ArgumentException("Base version cannot be null or empty.", nameof(baseVersion));
+            }
+
+            if (isLTS)
+            {
+ 
+                if (ltsBuild.HasValue && ltsBuild.Value > 0)
+                {
+                    return $"{baseVersion}-LTS-{ltsBuild.Value}";
+                }
+                else
+                {
+                    return $"{baseVersion}-LTS";
+                }
+            }
+            else
+            {
+                return baseVersion;
             }
         }
     }
