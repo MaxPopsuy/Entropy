@@ -1,21 +1,10 @@
-﻿using System;
-using Entropy;
-using System.Diagnostics;
-using System.Diagnostics.Tracing;
-using System.Runtime.InteropServices;
-using static Entropy.Commands;
-using System.Dynamic;
-using System.Xml.Linq;
-using static Entropy.UpdateManager;
+﻿using static Entropy.Commands;
 using static Entropy.Common;
-using Newtonsoft.Json.Linq;
-using System.Reflection;
-using static Entropy.Attributes;
 
 
 namespace Entropy
 {
-    
+
     class Program
     {
         public static void Main(string[] args)

@@ -1,16 +1,7 @@
-﻿using System;
+﻿using Spectre.Console;
 using System.Diagnostics;
-using System.Drawing;
-using Spectre;
-using Spectre.Console;
-using System.Threading;
-using System.Collections;
-using System.Collections.Specialized;
-using System.Dynamic;
-using System.Xml.Linq;
 using System.Text;
 using static Entropy.SettingsCommon;
-using static Entropy.SettingsManager;
 
 namespace Entropy
 {
@@ -512,7 +503,7 @@ namespace Entropy
                     var enumType = settingType;
                     var enumValues = Enum.GetNames(enumType);
 
-                    UpdateEnumSetting(settings, choice, enumValues, enumType);     
+                    UpdateEnumSetting(settings, choice, enumValues, enumType);
                 }
                 else
                 {

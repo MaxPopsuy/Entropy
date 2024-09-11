@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
+﻿using Spectre.Console;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using Entropy;
-using Spectre.Console;
-using static Entropy.AutostartManager;
 
 namespace Entropy
 {
@@ -50,7 +45,7 @@ namespace Entropy
             try
             {
                 string json = File.ReadAllText(settingsFilePath);
-    
+
                 if (string.IsNullOrWhiteSpace(json))
                 {
                     AnsiConsole.MarkupLine($"[red]Settings file is empty. Initializing default settings.[/]");
@@ -85,13 +80,13 @@ namespace Entropy
 
         private static Settings CreateDefaultSettings()
         {
-            var settings = new Settings(); 
+            var settings = new Settings();
             foreach (var property in typeof(Settings).GetProperties())
             {
                 if (property.CanRead && property.CanWrite)
                 {
-                    var defaultValue = property.GetValue(new Settings()); 
-                    property.SetValue(settings, defaultValue); 
+                    var defaultValue = property.GetValue(new Settings());
+                    property.SetValue(settings, defaultValue);
                 }
             }
 

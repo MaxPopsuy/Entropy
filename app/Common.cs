@@ -1,11 +1,9 @@
-﻿using System;
-using System.Reflection;
+﻿using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Xml.Linq;
 using static Entropy.Attributes;
 using static Entropy.Functions;
 using static Entropy.SettingsActions;
-using static Entropy.Utilities;
 
 namespace Entropy
 {

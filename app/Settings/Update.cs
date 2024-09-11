@@ -1,9 +1,4 @@
-﻿using System;
-using System.Net.Http;
-using System.Threading.Tasks;
-using System.Linq;
-using Newtonsoft.Json.Linq;
-using static Entropy.Utilities;
+﻿using Newtonsoft.Json.Linq;
 using Spectre.Console;
 
 namespace Entropy

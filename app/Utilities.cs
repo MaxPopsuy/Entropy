@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Diagnostics;
 using static Entropy.Commands;
 using static Entropy.Native;
 
@@ -69,7 +63,7 @@ namespace Entropy
             foreach (ProcessThread processThread in process.Threads)
             {
                 IntPtr openThread = OpenThread(ThreadAccess.SUSPEND_RESUME, false, (uint)processThread.Id);
-                    
+
                 if (openThread == IntPtr.Zero)
                 {
                     continue;
@@ -118,7 +112,7 @@ namespace Entropy
 
             if (isLTS)
             {
- 
+
                 if (ltsBuild.HasValue && ltsBuild.Value > 0)
                 {
                     return $"{baseVersion}-LTS-{ltsBuild.Value}";
