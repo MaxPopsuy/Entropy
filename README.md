@@ -71,7 +71,7 @@
 | 1.0.4   | LTS version | In Release |
 | | | |
 | 1.1.0 | Improved ui, help find functions,  as well as some bugfixes | In Release |
-| 1.1.1 | Added settings feature as experimental command | Inwork |
+| 1.1.1 | Added settings feature as experimental command | In Release(EXP) |
 </details>
 
 ---
