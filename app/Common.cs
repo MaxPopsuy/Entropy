@@ -65,8 +65,8 @@ namespace Entropy
             ["getpath"] = ["<process.id> | <process.name>", "Displays the executable path of a specified process by its ID or name."],
             ["suspend"] = ["<process.id> | <process.name>", "Pauses a process by its ID or name."],
             ["unsuspend"] = ["<process.id> | <process.name>", "Resumes a suspended process by its ID or name."],
-            ["settings"] = ["<option>", "[red]EXPERIMENTAL[/]Modifies or displays application settings. Use `<key>` and `<value>` to change settings directly or `<option>`: `show` to view all settings."],
-            ["check"] = ["<>", "[red]EXPERIMENTAL[/]Should be versatile function for checking various stuff, for now at least it checks for available updates."]
+            ["settings"] = ["<>", "[red]EXPERIMENTAL[/] Modifies or displays application settings."],
+            ["check"] = ["<>", "[red]EXPERIMENTAL[/] Should be versatile function for checking various stuff, for now at least it checks for available updates."]
         };
 
         public static Dictionary<string, string[]> _commandsAliases = new()
