@@ -1,71 +1,75 @@
-﻿using System;
-using Entropy;
-using System.Diagnostics;
-using System.Diagnostics.Tracing;
-using System.Runtime.InteropServices;
-using static Entropy.Commands;
-using System.Dynamic;
-using System.Xml.Linq;
+﻿using static Entropy.Commands;
+using static Entropy.Common;
 
-class Program
+
+namespace Entropy
 {
 
-    public static void Main(string[] args)
+    class Program
     {
-        Console.Title = "Entropy";
-        Utilities.EntropyScreen(true);
-
-        while (true)
+        public static void Main(string[] args)
         {
+            Console.Title = "Entropy";
+            Utilities.EntropyScreen(true);
 
-            Utilities.EntropyWaitAnimation();
+            SettingsManager.InitializeSettings();
+            Settings settings = SettingsManager.LoadSettings();
 
-            string? input = Console.ReadLine();
-            string?[] output = input?.Split("&") ?? Array.Empty<string>();
-            Console.ForegroundColor = ConsoleColor.DarkMagenta;
+            Task updateCheckTask = UpdateManager.CheckForUpdates(EntropyVersion, settings);
+            updateCheckTask.Wait();
 
-            foreach (string? raw in output)
+            while (true)
             {
-                string[] inputArray = raw?.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries) ?? Array.Empty<string>();
 
-                string? command = null;
-                string? firstArgument = null;
-                string? secondArgument = null;
+                Utilities.EntropyWaitAnimation();
 
-                try
+                string? input = Console.ReadLine();
+                string?[] output = input?.Split("&") ?? Array.Empty<string>();
+                Console.ForegroundColor = ConsoleColor.DarkMagenta;
+
+                foreach (string? raw in output)
                 {
-                    command = inputArray[0];
-                    firstArgument = inputArray[1];
-                    secondArgument = inputArray[2];
-                }
-                catch { }
-                if (!string.IsNullOrEmpty(command))
-                {
-                    command = Utilities.EntropyGetCommandFromAlias(command);
+                    string[] inputArray = raw?.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries) ?? Array.Empty<string>();
 
-                    if (!_commands.TryGetValue(command, out var commandMethod))
+                    string? command = null;
+                    string? firstArgument = null;
+                    string? secondArgument = null;
+
+                    try
                     {
-                        Console.WriteLine($"{command} is an unknown command, if you need help with commands, type 'help' \n");
+                        command = inputArray[0];
+                        firstArgument = inputArray[1];
+                        secondArgument = inputArray[2];
                     }
-                    else
+                    catch { }
+                    if (!string.IsNullOrEmpty(command))
                     {
-                        if (commandMethod != null)
+                        command = Utilities.EntropyGetCommandFromAlias(command);
+
+                        if (!_commands.TryGetValue(command, out var commandMethod))
                         {
-                            if (firstArgument != null && secondArgument != null)
+                            Console.WriteLine($"{command} is an unknown command, if you need help with commands, type 'help' \n");
+                        }
+                        else
+                        {
+                            if (commandMethod != null)
                             {
-                                commandMethod.Invoke(firstArgument, secondArgument);
-                            }
-                            else if (firstArgument != null)
-                            {
-                                commandMethod.Invoke(firstArgument, string.Empty);
-                            }
-                            else if (secondArgument != null)
-                            {
-                                commandMethod.Invoke(string.Empty, secondArgument);
-                            }
-                            else
-                            {
-                                commandMethod.Invoke(string.Empty, string.Empty);
+                                if (firstArgument != null && secondArgument != null)
+                                {
+                                    commandMethod.Invoke(firstArgument, secondArgument);
+                                }
+                                else if (firstArgument != null)
+                                {
+                                    commandMethod.Invoke(firstArgument, string.Empty);
+                                }
+                                else if (secondArgument != null)
+                                {
+                                    commandMethod.Invoke(string.Empty, secondArgument);
+                                }
+                                else
+                                {
+                                    commandMethod.Invoke(string.Empty, string.Empty);
+                                }
                             }
                         }
                     }

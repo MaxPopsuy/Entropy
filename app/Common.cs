@@ -1,14 +1,56 @@
-﻿using System;
-using System.Reflection;
+﻿using System.Reflection;
 using System.Runtime.InteropServices;
+using System.Xml.Linq;
+using static Entropy.Attributes;
 using static Entropy.Functions;
+using static Entropy.SettingsActions;
 
 namespace Entropy
 {
     public class Common
     {
+        public XDocument doc = XDocument.Load("Entropy.csproj");
+
+
         public static string EntropyAssemblyVersion = Assembly.GetEntryAssembly().GetName().Version.ToString();
-        public static string EntropyVersion = EntropyAssemblyVersion.Substring(0, EntropyAssemblyVersion.Length - 2);
+        public static bool EntropyIsLTS = bool.Parse(Assembly.GetEntryAssembly().GetCustomAttribute<IsLTSAttribute>().IsLTS);
+        public static int EntropyLTSBuild = Int32.Parse(Assembly.GetEntryAssembly().GetCustomAttribute<LTSBuildAttribute>().LTSBuild);
+
+        public static string EntropyVersionA = EntropyAssemblyVersion.Substring(0, EntropyAssemblyVersion.Length - 2);
+        public static string EntropyVersion = Utilities.EntropyGetVersion(EntropyVersionA, EntropyIsLTS, EntropyLTSBuild);
+        public const string EntropyName = "Entropy";
+    }
+
+    public class Attributes
+    {
+        [AttributeUsage(AttributeTargets.Assembly)]
+        public class IsLTSAttribute : Attribute
+        {
+            public string IsLTS { get; set; }
+            public IsLTSAttribute(string value)
+            {
+                IsLTS = value;
+            }
+        }
+        public class LTSBuildAttribute : Attribute
+        {
+            public string LTSBuild { get; set; }
+            public LTSBuildAttribute(string value)
+            {
+                LTSBuild = value;
+            }
+        }
+
+    }
+
+    public class SettingsCommon
+    {
+        internal static readonly Dictionary<string, Action<object>> settingsActions = new Dictionary<string, Action<object>>
+        {
+            { nameof(Settings.AutoStart), value => HandleAutoStart((bool)value) },
+            { nameof(Settings.CheckForUpdates), value => HandleCheckForUpdates((bool)value) },
+            { nameof(Settings.PHAutoUpdate), value => HandleAutoUpdate((bool)value) }
+        };
     }
 
     public class Commands
@@ -22,7 +64,9 @@ namespace Entropy
             ["find"] = ["<process.id> | <process.name> / <mode>", "Finds a process by name or ID and shows its status. Use `<mode>`: `s` for strict, `f` for flexible matching."],
             ["getpath"] = ["<process.id> | <process.name>", "Displays the executable path of a specified process by its ID or name."],
             ["suspend"] = ["<process.id> | <process.name>", "Pauses a process by its ID or name."],
-            ["unsuspend"] = ["<process.id> | <process.name>", "Resumes a suspended process by its ID or name."]
+            ["unsuspend"] = ["<process.id> | <process.name>", "Resumes a suspended process by its ID or name."],
+            ["settings"] = ["<option>", "[red]EXPERIMENTAL[/]Modifies or displays application settings. Use `<key>` and `<value>` to change settings directly or `<option>`: `show` to view all settings."],
+            ["check"] = ["<>", "[red]EXPERIMENTAL[/]Should be versatile function for checking various stuff, for now at least it checks for available updates."]
         };
 
         public static Dictionary<string, string[]> _commandsAliases = new()
@@ -34,7 +78,9 @@ namespace Entropy
             ["find"] = ["f"],
             ["getpath"] = ["gp"],
             ["suspend"] = ["sp", "spnd"],
-            ["unsuspend"] = ["uns", "us"]
+            ["unsuspend"] = ["uns", "us"],
+            ["settings"] = ["s", "set"],
+            ["check"] = ["c"]
         };
 
 
@@ -48,6 +94,8 @@ namespace Entropy
             ["getpath"] = GetPathFunction,
             ["suspend"] = SuspendFunction,
             ["unsuspend"] = UnsuspendFunction,
+            ["settings"] = SettingsFunction,
+            ["check"] = CheckFunction
         };
     }
 

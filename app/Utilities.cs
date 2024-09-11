@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Diagnostics;
 using static Entropy.Commands;
 using static Entropy.Native;
 
@@ -22,7 +16,7 @@ namespace Entropy
             Console.WriteLine($"███████╗██║ ╚████║   ██║   ██║  ██║╚██████╔╝██║        ██║   ");
             Console.WriteLine($"╚══════╝╚═╝  ╚═══╝   ╚═╝   ╚═╝  ╚═╝ ╚═════╝ ╚═╝        ╚═╝   ");
 
-            Console.WriteLine(help ? "Write h or help for list of commands, welcome to entropy!" : null);
+            Console.WriteLine(help ? "Write h or help for list of commands, welcome to Entropy!" : null);
 
             Console.ResetColor();
         }
@@ -69,7 +63,7 @@ namespace Entropy
             foreach (ProcessThread processThread in process.Threads)
             {
                 IntPtr openThread = OpenThread(ThreadAccess.SUSPEND_RESUME, false, (uint)processThread.Id);
-                    
+
                 if (openThread == IntPtr.Zero)
                 {
                     continue;
@@ -106,6 +100,31 @@ namespace Entropy
                 } while (suspendCount > 0);
 
                 CloseHandle(processOpenThread);
+            }
+        }
+
+        public static string EntropyGetVersion(string baseVersion, bool isLTS, int? ltsBuild)
+        {
+            if (string.IsNullOrEmpty(baseVersion))
+            {
+                throw new ArgumentException("Base version cannot be null or empty.", nameof(baseVersion));
+            }
+
+            if (isLTS)
+            {
+
+                if (ltsBuild.HasValue && ltsBuild.Value > 0)
+                {
+                    return $"{baseVersion}-LTS-{ltsBuild.Value}";
+                }
+                else
+                {
+                    return $"{baseVersion}-LTS";
+                }
+            }
+            else
+            {
+                return baseVersion;
             }
         }
     }
