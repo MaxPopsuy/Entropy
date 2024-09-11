@@ -58,7 +58,7 @@ namespace Entropy
                 }
                 else
                 {
-                    Console.WriteLine($"[red]No such command '{command}' found.[/]");
+                   AnsiConsole.Markup($"[red]No such command '{command}' found.[/]");
                 }
             }
             else
