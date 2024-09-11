@@ -48,7 +48,7 @@ namespace Entropy
         internal static readonly Dictionary<string, Action<object>> settingsActions = new Dictionary<string, Action<object>>
         {
             { nameof(Settings.AutoStart), value => HandleAutoStart((bool)value) },
-            { nameof(Settings.PHCheckForUpdates), value => HandleCheckForUpdates((bool)value) },
+            { nameof(Settings.CheckForUpdates), value => HandleCheckForUpdates((bool)value) },
             { nameof(Settings.PHAutoUpdate), value => HandleAutoUpdate((bool)value) }
         };
     }
@@ -65,7 +65,8 @@ namespace Entropy
             ["getpath"] = ["<process.id> | <process.name>", "Displays the executable path of a specified process by its ID or name."],
             ["suspend"] = ["<process.id> | <process.name>", "Pauses a process by its ID or name."],
             ["unsuspend"] = ["<process.id> | <process.name>", "Resumes a suspended process by its ID or name."],
-            ["settings"] = ["<option>", "[red]EXPERIMENTAL[/]Modifies or displays application settings. Use `<key>` and `<value>` to change settings directly or `<option>`: `show` to view all settings."]
+            ["settings"] = ["<option>", "[red]EXPERIMENTAL[/]Modifies or displays application settings. Use `<key>` and `<value>` to change settings directly or `<option>`: `show` to view all settings."],
+            ["check"] = ["<>", "[red]EXPERIMENTAL[/]Should be versatile function for checking various stuff, for now at least it checks for available updates."]
         };
 
         public static Dictionary<string, string[]> _commandsAliases = new()
@@ -78,7 +79,8 @@ namespace Entropy
             ["getpath"] = ["gp"],
             ["suspend"] = ["sp", "spnd"],
             ["unsuspend"] = ["uns", "us"],
-            ["settings"] = ["s", "set"]
+            ["settings"] = ["s", "set"],
+            ["check"] = ["c"]
         };
 
 
@@ -92,7 +94,8 @@ namespace Entropy
             ["getpath"] = GetPathFunction,
             ["suspend"] = SuspendFunction,
             ["unsuspend"] = UnsuspendFunction,
-            ["settings"] = SettingsFunction
+            ["settings"] = SettingsFunction,
+            ["check"] = CheckFunction
         };
     }
 

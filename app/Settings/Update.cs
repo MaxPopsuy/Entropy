@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json.Linq;
 using Spectre.Console;
+using static Entropy.SettingsManager;
 
 namespace Entropy
 {
@@ -8,7 +9,8 @@ namespace Entropy
         private const string RepoUrl = "https://api.github.com/repos/MaxPopsuy/Entropy/releases";
         private const string UserAgent = "MaxPopsuy";
 
-        public static async Task CheckForUpdates(string currentVersion)
+
+        public static async Task CheckForUpdates(string currentVersion, Settings settings)
         {
             using var httpClient = new HttpClient();
             httpClient.DefaultRequestHeaders.Add("User-Agent", UserAgent);
@@ -49,21 +51,21 @@ namespace Entropy
 
                 if (!currentParsedVersion.IsLTS)
                 {
-                    if (latestNormalVersion != null && CompareVersions(currentParsedVersion, latestNormalVersion.Version))
+                    if (latestNormalVersion != null && CompareVersions(currentParsedVersion, latestNormalVersion.Version) && settings.DisplayVersionUpdateMessage == true)
                     {
                         AnsiConsole.MarkupLine($"[purple]New version available: [fuchsia]{latestNormalVersion.Name}[/][/]");
                     }
-                    else
+                    else if (settings.DisplayVersionUpdateMessage == true)
                     {
                         AnsiConsole.MarkupLine($"[purple]You are on the latest version: [fuchsia]{Common.EntropyVersion}[/][/]");
                     }
 
-                    if (latestLTSVersion != null)
+                    if (latestLTSVersion != null && settings.DisplayLTSUpdateMessage == true)
                     {
                         AnsiConsole.MarkupLine($"[purple]Latest LTS version available: [fuchsia]{latestLTSVersion.Name}[/][/]");
                     }
                 }
-                else
+                else if (settings.DisplayLTSUpdateMessage == true)
                 {
                     if (latestLTSVersion != null && CompareVersions(currentParsedVersion, latestLTSVersion.Version))
                     {

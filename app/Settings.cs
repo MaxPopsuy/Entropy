@@ -130,7 +130,7 @@ namespace Entropy
     {
         // Generic
         public bool AutoStart { get; set; } = false;
-        public bool PHCheckForUpdates { get; set; } = true;
+        public bool CheckForUpdates { get; set; } = true;
         public bool PHAutoUpdate { get; set; } = false;
         public bool DisplayVersionUpdateMessage { get; set; } = true;
         public bool DisplayLTSUpdateMessage { get; set; } = true;

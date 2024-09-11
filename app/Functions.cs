@@ -462,11 +462,21 @@ namespace Entropy
             Console.WriteLine();
         }
 
+        public static void CheckFunction(string _, string __)
+        {
+            Settings settings = SettingsManager.LoadSettings();
+
+            Task updateCheckTask = UpdateManager.CheckForUpdates(Common.EntropyVersion, settings);
+            updateCheckTask.Wait();
+        }
+
         public static void SettingsFunction(string _, string __)
         {
             SettingsManager.InitializeSettings();
             var settings = SettingsManager.LoadSettings();
             Console.ResetColor();
+
+            AnsiConsole.Markup("[red]WARNING: This is an experimental feature. It may change at any time and could be removed in future versions of Entropy.[/]\n");
 
             while (true)
             {
@@ -475,7 +485,7 @@ namespace Entropy
                     .Header("[white]Entropy Settings[/]")
                     .Border(BoxBorder.Square).HeaderAlignment(Justify.Center)
                 );
-
+                AnsiConsole.Markup("[red]WARNING: This is an experimental feature. It may change at any time and could be removed in future versions of Entropy.[/]\n");
                 var choice = AnsiConsole.Prompt(new SelectionPrompt<string>()
                     .Title("[purple]Select a setting to change:[/]")
                     .AddChoices(GetSettingsNames())

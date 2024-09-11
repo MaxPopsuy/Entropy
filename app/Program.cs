@@ -13,9 +13,9 @@ namespace Entropy
             Utilities.EntropyScreen(true);
 
             SettingsManager.InitializeSettings();
-            SettingsManager.LoadSettings();
+            Settings settings = SettingsManager.LoadSettings();
 
-            Task updateCheckTask = UpdateManager.CheckForUpdates(EntropyVersion);
+            Task updateCheckTask = UpdateManager.CheckForUpdates(EntropyVersion, settings);
             updateCheckTask.Wait();
 
             while (true)
