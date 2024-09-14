@@ -55,6 +55,13 @@
   - Minor bug fixes and performance enhancements
   - Code cleanup for stability
 
+### Experimental Release:
+[v1.1.1-EXP](https://github.com/MaxPopsuy/Entropy/releases/tag/v1.1.1-EXP)
+
+- **Date Released**: 11.09.24
+- **Changes**:
+  - Experimental settings function
+
 ---
 
 ## Version Logs
@@ -93,7 +100,7 @@
 
 ## Future Versions
 
-![DevVersion](https://img.shields.io/badge/dev%20version-1.1.X-purple?style=for-the-badge&labelColor=222)
+![DevVersion](https://img.shields.io/badge/dev%20version-1.1.1-EXP-purple?style=for-the-badge&labelColor=222)
 
 | VERSION | DESCRIPTION | STATUS |
 | ------- | ----------- | ------ |
@@ -131,7 +138,17 @@
 
 - Custom loader for user mods
 - Potential net scanner
-- Final refactoring and last LTS release
+- Final refactoring and last(probably) LTS release
+
+### v3.0.0
+
+After 2.0 i want to experiment quite a bit with TUI, so probably 3.x.x will be last version of entropy, including:
+
+- Better terminal ui
+- Cleaner functions 
+- Mod Manager (and probably a guide inside an app)
+- Theme manager
+
 
 ---
 
