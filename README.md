@@ -55,8 +55,7 @@
   - Minor bug fixes and performance enhancements
   - Code cleanup for stability
 
-### Experimental Release:
-[v1.1.1-EXP](https://github.com/MaxPopsuy/Entropy/releases/tag/v1.1.1-EXP)
+### Experimental Release: [v1.1.1-EXP](https://github.com/MaxPopsuy/Entropy/releases/tag/v1.1.1-EXP)
 
 - **Date Released**: 11.09.24
 - **Changes**:
@@ -100,7 +99,7 @@
 
 ## Future Versions
 
-![DevVersion](https://img.shields.io/badge/dev%20version-1.1.1-EXP-purple?style=for-the-badge&labelColor=222)
+![DevVersion](https://img.shields.io/badge/dev%20version-1.1.1_EXP-purple?style=for-the-badge&labelColor=222)
 
 | VERSION | DESCRIPTION | STATUS |
 | ------- | ----------- | ------ |
