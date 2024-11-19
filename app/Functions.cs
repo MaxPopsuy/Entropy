@@ -127,6 +127,11 @@ namespace Entropy
             Utilities.EntropyScreen();
         }
 
+        public static void ExitFunction(string _, string __)
+        {
+            Environment.Exit(0);
+        }
+
         public static void StatusFunction(string _, string __)
         {
             Console.WriteLine();

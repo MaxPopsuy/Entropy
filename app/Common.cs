@@ -66,7 +66,8 @@ namespace Entropy
             ["suspend"] = ["<process.id> | <process.name>", "Pauses a process by its ID or name."],
             ["unsuspend"] = ["<process.id> | <process.name>", "Resumes a suspended process by its ID or name."],
             ["settings"] = ["<option>", "[red]EXPERIMENTAL[/]Modifies or displays application settings. Use `<key>` and `<value>` to change settings directly or `<option>`: `show` to view all settings."],
-            ["check"] = ["<>", "[red]EXPERIMENTAL[/]Should be versatile function for checking various stuff, for now at least it checks for available updates."]
+            ["check"] = ["<>", "[red]EXPERIMENTAL[/]Should be versatile function for checking various stuff, for now at least it checks for available updates."],
+            ["exit"] = ["<>", "Terminates the application."],
         };
 
         public static Dictionary<string, string[]> _commandsAliases = new()
@@ -80,7 +81,8 @@ namespace Entropy
             ["suspend"] = ["sp", "spnd"],
             ["unsuspend"] = ["uns", "us"],
             ["settings"] = ["s", "set"],
-            ["check"] = ["c"]
+            ["check"] = ["c"],
+            ["exit"] = ["ex", "e"],
         };
 
 
@@ -95,7 +97,8 @@ namespace Entropy
             ["suspend"] = SuspendFunction,
             ["unsuspend"] = UnsuspendFunction,
             ["settings"] = SettingsFunction,
-            ["check"] = CheckFunction
+            ["check"] = CheckFunction,
+            ["exit"] = ExitFunction,
         };
     }
 
