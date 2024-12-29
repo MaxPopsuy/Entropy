@@ -112,30 +112,32 @@
 ### v1.2.0
 
 - Introduction of `Entropy.Panel` and `Entropy.Table` for cleaner code
-- Additional functions
-- Advanced status features (e.g., sorting by name or RAM usage)
-- Enhanced suspend/unsuspend functionality
-- Add RAM/CPU/GPU usage to process list, find etc (probably will be experimental feature till next lts release)
 - Settings command
+- Settings features (such as saving to file/loading from file and folder for this)
+- Advanced status features (e.g., sorting by name or RAM usage)
+- Add RAM/CPU/GPU usage to process list, find etc (probably will be experimental feature till next lts release)
 - Autostart system
 - Refactoring
 
 ### v1.3.0
 
 - Additional commands and functions
-- Advanced settings features (such as saving to file/loading from file and folder for this)
 - Logging system (for development and testing, experimental)
 - Detailed stats for RAM/CPU/GPU usage
+- Advanced command handling
+- Enhanced suspend/unsuspend functionality
 - Refactoring
 
 ### v1.4.0
 
 - Charts for RAM/CPU/GPU usage (probably will be available as experimental feature in previous versions)
 - Themes and theme loader
+- Mod Manager preview
+- Refactoring
 
 ### v2.0.0
 
-- Custom loader for user mods
+- Mod Manager
 - Potential net scanner
 - Final refactoring and last(probably) LTS release
 
