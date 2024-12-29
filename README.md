@@ -130,7 +130,7 @@
 
 ### v1.4.0
 
-- Charts for RAM/CPU/GPU usage (will be available ass experimental feature in previous versions)
+- Charts for RAM/CPU/GPU usage (probably will be available as experimental feature in previous versions)
 - Themes and theme loader
 
 ### v2.0.0
