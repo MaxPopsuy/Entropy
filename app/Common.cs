@@ -19,7 +19,7 @@ namespace Entropy
         public static int EntropyEXPBuild = Int32.Parse(Assembly.GetEntryAssembly().GetCustomAttribute<EXPBuildAttribute>().EXPBuild);
 
         public static string EntropyVersionA = EntropyAssemblyVersion.Substring(0, EntropyAssemblyVersion.Length - 2);
-        public static string EntropyVersion = Utilities.EntropyGetVersion(EntropyVersionA, EntropyIsLTS, EntropyLTSBuild);
+        public static string EntropyVersion = Utilities.EntropyGetVersion(EntropyVersionA, EntropyIsLTS, EntropyLTSBuild, EntropyIsEXP, EntropyEXPBuild);
         public const string EntropyName = "Entropy";
 
         public const string RepoUrl = "https://api.github.com/repos/MaxPopsuy/Entropy/releases";

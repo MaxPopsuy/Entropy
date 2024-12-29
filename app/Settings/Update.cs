@@ -1,16 +1,22 @@
 ﻿using Newtonsoft.Json.Linq;
 using Spectre.Console;
-using static Entropy.SettingsManager;
 using static Entropy.Common;
 
 namespace Entropy
 {
     internal class UpdateManager
     {
-        public static async Task CheckForUpdates(string currentVersion, Settings settings)
+        public static async Task CheckForUpdates(string currentVersion, Settings settings, bool IsOnStartup = false)
         {
+            if (IsOnStartup == true && settings.CheckForUpdates == false)
+            {
+                return;
+            }
             using var httpClient = new HttpClient();
             httpClient.DefaultRequestHeaders.Add("User-Agent", UserAgent);
+
+            AnsiConsole.MarkupLine($"[purple]You are on version [fuchsia]{EntropyVersion}[/] of Entropy[/]");
+            AnsiConsole.MarkupLine($"[purple]Checking for updates...[/]");
 
             try
             {
@@ -28,9 +34,8 @@ namespace Entropy
                 var currentParsedVersion = ParseVersionString(currentVersion);
 
                 var latestNormalVersion = parsedReleases
-                    .Where(release => !release.Version.IsLTS)
+                    .Where(release => !release.Version.IsLTS && !release.Version.IsEXP)
                     .OrderByDescending(release => release.Version.BaseVersion)
-                    .ThenByDescending(release => release.Version.LTSBuild)
                     .FirstOrDefault();
 
                 var latestLTSVersion = parsedReleases
@@ -46,23 +51,41 @@ namespace Entropy
                     .OrderBy(release => release.Version.LTSBuild)
                     .ToList();
 
-                if (!currentParsedVersion.IsLTS)
+                var latestEXPVersion = parsedReleases
+                    .Where(release => release.Version.IsEXP)
+                    .OrderByDescending(release => release.Version.BaseVersion)
+                    .ThenByDescending(release => release.Version.EXPBuild)
+                    .FirstOrDefault();
+
+                var newerEXPBuilds = parsedReleases
+                    .Where(release => release.Version.IsEXP &&
+                                      release.Version.BaseVersion == currentParsedVersion.BaseVersion &&
+                                      release.Version.EXPBuild > currentParsedVersion.EXPBuild)
+                    .OrderBy(release => release.Version.EXPBuild)
+                    .ToList();
+
+                if (!currentParsedVersion.IsLTS && !currentParsedVersion.IsEXP)
                 {
-                    if (latestNormalVersion != null && CompareVersions(currentParsedVersion, latestNormalVersion.Version) && settings.DisplayVersionUpdateMessage == true)
+                    if (latestNormalVersion != null && CompareVersions(currentParsedVersion, latestNormalVersion.Version))
                     {
                         AnsiConsole.MarkupLine($"[purple]New version available: [fuchsia]{latestNormalVersion.Name}[/][/]");
                     }
-                    else if (settings.DisplayVersionUpdateMessage == true)
+                    else
                     {
                         AnsiConsole.MarkupLine($"[purple]You are on the latest version: [fuchsia]{Common.EntropyVersion}[/][/]");
                     }
 
-                    if (latestLTSVersion != null && settings.DisplayLTSUpdateMessage == true)
+                    if (latestLTSVersion != null)
                     {
                         AnsiConsole.MarkupLine($"[purple]Latest LTS version available: [fuchsia]{latestLTSVersion.Name}[/][/]");
                     }
+
+                    if (latestEXPVersion != null)
+                    {
+                        AnsiConsole.MarkupLine($"[purple]Latest EXP version available: [fuchsia]{latestEXPVersion.Name}[/][/]");
+                    }
                 }
-                else if (settings.DisplayLTSUpdateMessage == true)
+                else if (currentParsedVersion.IsLTS)
                 {
                     if (latestLTSVersion != null && CompareVersions(currentParsedVersion, latestLTSVersion.Version))
                     {
@@ -75,6 +98,31 @@ namespace Entropy
                     else
                     {
                         AnsiConsole.MarkupLine($"[purple]You are on the latest LTS version.[/]");
+                    }
+
+                    if (latestEXPVersion != null)
+                    {
+                        AnsiConsole.MarkupLine($"[purple]Latest EXP version available: [fuchsia]{latestEXPVersion.Name}[/][/]");
+                    }
+                }
+                else if (currentParsedVersion.IsEXP)
+                {
+                    if (latestEXPVersion != null && CompareVersions(currentParsedVersion, latestEXPVersion.Version))
+                    {
+                        AnsiConsole.MarkupLine($"[purple]New EXP build available: [fuchsia]{latestEXPVersion.Name}[/][/]");
+                    }
+                    else if (newerEXPBuilds.Any())
+                    {
+                        AnsiConsole.MarkupLine($"[purple]New EXP builds available: [fuchsia]{string.Join(", ", newerEXPBuilds.Select(r => r.Name))}[/][/]");
+                    }
+                    else
+                    {
+                        AnsiConsole.MarkupLine($"[purple]You are on the latest EXP version.[/]");
+                    }
+
+                    if (latestNormalVersion != null)
+                    {
+                        AnsiConsole.MarkupLine($"[purple]Latest normal version available: [fuchsia]{latestNormalVersion.Name}[/][/]");
                     }
                 }
             }
@@ -99,9 +147,17 @@ namespace Entropy
             {
                 parsedVersion.IsLTS = true;
             }
-            if (parts.Length > 2)
+            else if (parts.Length > 1 && parts[1] == "EXP")
+            {
+                parsedVersion.IsEXP = true;
+            }
+            if (parts.Length > 2 && parts[1] == "LTS")
             {
                 parsedVersion.LTSBuild = int.Parse(parts[2]);
+            }
+            else if (parts.Length > 2 && parts[1] == "EXP")
+            {
+                parsedVersion.EXPBuild = int.Parse(parts[2]);
             }
 
             return parsedVersion;
@@ -118,8 +174,15 @@ namespace Entropy
                 return false;
             if (current.IsLTS != latest.IsLTS)
                 return latest.IsLTS;
+            if (current.IsEXP != latest.IsEXP)
+                return latest.IsEXP;
 
-            return current.LTSBuild < latest.LTSBuild;
+            if (current.IsLTS)
+                return current.LTSBuild < latest.LTSBuild;
+            if (current.IsEXP)
+                return current.EXPBuild < latest.EXPBuild;
+
+            return false;
         }
 
         public class ParsedVersion
@@ -127,6 +190,8 @@ namespace Entropy
             public string BaseVersion { get; set; }
             public bool IsLTS { get; set; }
             public int LTSBuild { get; set; }
+            public bool IsEXP { get; set; }
+            public int EXPBuild { get; set; }
         }
     }
 }

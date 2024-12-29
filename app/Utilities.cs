@@ -103,7 +103,7 @@ namespace Entropy
             }
         }
 
-        public static string EntropyGetVersion(string baseVersion, bool isLTS, int? ltsBuild)
+        public static string EntropyGetVersion(string baseVersion, bool isLTS, int? ltsBuild, bool isEXP, int? expBuild)
         {
             if (string.IsNullOrEmpty(baseVersion))
             {
@@ -120,6 +120,18 @@ namespace Entropy
                 else
                 {
                     return $"{baseVersion}-LTS";
+                }
+            }
+            else if (isEXP)
+            {
+
+                if (expBuild.HasValue && expBuild.Value > 0)
+                {
+                    return $"{baseVersion}-EXP-{expBuild.Value}";
+                }
+                else
+                {
+                    return $"{baseVersion}-EXP";
                 }
             }
             else

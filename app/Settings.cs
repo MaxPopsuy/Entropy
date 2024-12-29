@@ -132,9 +132,6 @@ namespace Entropy
         public bool AutoStart { get; set; } = false;
         public bool CheckForUpdates { get; set; } = true;
         public bool PHAutoUpdate { get; set; } = false;
-        public bool DisplayVersionUpdateMessage { get; set; } = true;
-        public bool DisplayLTSUpdateMessage { get; set; } = true;
-        public bool DisplayExperimentalUpdateMessage { get; set; } = true;
 
         // Functions
         // EXPERIMENTAL
@@ -159,9 +156,7 @@ namespace Entropy
 
         public static void HandleCheckForUpdates(bool value)
         {
-            AnsiConsole.MarkupLine("[green]Checking for updates...[/]");
-            Task.Delay(1000).Wait();
-            AnsiConsole.MarkupLine("[green]Update check completed![/]");
+            AnsiConsole.MarkupLine($"[green]CheckForUpdates and related settings updated to '{value}'.[/]");
         }
         public static void HandleAutoUpdate(bool value)
         {
