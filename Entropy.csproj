@@ -28,6 +28,14 @@
       <_Parameter1>0</_Parameter1>
     </AssemblyAttribute>
   </ItemGroup>
+  <ItemGroup>
+    <AssemblyAttribute Include="Entropy.Attributes.IsEXPAttribute">
+      <_Parameter1>true</_Parameter1>
+    </AssemblyAttribute>
+    <AssemblyAttribute Include="Entropy.Attributes.EXPBuildAttribute">
+      <_Parameter1>0</_Parameter1>
+    </AssemblyAttribute>
+  </ItemGroup>
 
   <ItemGroup>
     <Content Include="entropy3.ico" />

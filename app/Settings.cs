@@ -134,6 +134,7 @@ namespace Entropy
         public bool PHAutoUpdate { get; set; } = false;
         public bool DisplayVersionUpdateMessage { get; set; } = true;
         public bool DisplayLTSUpdateMessage { get; set; } = true;
+        public bool DisplayExperimentalUpdateMessage { get; set; } = true;
 
         // Functions
         // EXPERIMENTAL

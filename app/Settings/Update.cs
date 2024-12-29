@@ -1,15 +1,12 @@
 ﻿using Newtonsoft.Json.Linq;
 using Spectre.Console;
 using static Entropy.SettingsManager;
+using static Entropy.Common;
 
 namespace Entropy
 {
     internal class UpdateManager
     {
-        private const string RepoUrl = "https://api.github.com/repos/MaxPopsuy/Entropy/releases";
-        private const string UserAgent = "MaxPopsuy";
-
-
         public static async Task CheckForUpdates(string currentVersion, Settings settings)
         {
             using var httpClient = new HttpClient();

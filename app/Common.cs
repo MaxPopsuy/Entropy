@@ -15,10 +15,15 @@ namespace Entropy
         public static string EntropyAssemblyVersion = Assembly.GetEntryAssembly().GetName().Version.ToString();
         public static bool EntropyIsLTS = bool.Parse(Assembly.GetEntryAssembly().GetCustomAttribute<IsLTSAttribute>().IsLTS);
         public static int EntropyLTSBuild = Int32.Parse(Assembly.GetEntryAssembly().GetCustomAttribute<LTSBuildAttribute>().LTSBuild);
+        public static bool EntropyIsEXP = bool.Parse(Assembly.GetEntryAssembly().GetCustomAttribute<IsEXPAttribute>().IsEXP);
+        public static int EntropyEXPBuild = Int32.Parse(Assembly.GetEntryAssembly().GetCustomAttribute<EXPBuildAttribute>().EXPBuild);
 
         public static string EntropyVersionA = EntropyAssemblyVersion.Substring(0, EntropyAssemblyVersion.Length - 2);
         public static string EntropyVersion = Utilities.EntropyGetVersion(EntropyVersionA, EntropyIsLTS, EntropyLTSBuild);
         public const string EntropyName = "Entropy";
+
+        public const string RepoUrl = "https://api.github.com/repos/MaxPopsuy/Entropy/releases";
+        public static string UserAgent = $"EntropyApp/{EntropyAssemblyVersion}";
     }
 
     public class Attributes
@@ -38,6 +43,22 @@ namespace Entropy
             public LTSBuildAttribute(string value)
             {
                 LTSBuild = value;
+            }
+        }
+        public class IsEXPAttribute : Attribute
+        {
+            public string IsEXP { get; set; }
+            public IsEXPAttribute(string value)
+            {
+                IsEXP = value;
+            }
+        }
+        public class EXPBuildAttribute : Attribute
+        {
+            public string EXPBuild { get; set; }
+            public EXPBuildAttribute(string value)
+            {
+                EXPBuild = value;
             }
         }
 
@@ -65,8 +86,8 @@ namespace Entropy
             ["getpath"] = ["<process.id> | <process.name>", "Displays the executable path of a specified process by its ID or name."],
             ["suspend"] = ["<process.id> | <process.name>", "Pauses a process by its ID or name."],
             ["unsuspend"] = ["<process.id> | <process.name>", "Resumes a suspended process by its ID or name."],
-            ["settings"] = ["<option>", "[red]EXPERIMENTAL[/]Modifies or displays application settings. Use `<key>` and `<value>` to change settings directly or `<option>`: `show` to view all settings."],
-            ["check"] = ["<>", "[red]EXPERIMENTAL[/]Should be versatile function for checking various stuff, for now at least it checks for available updates."],
+            ["settings"] = ["<option>", "[red]EXPERIMENTAL[/] Modifies or displays application settings. Use `<key>` and `<value>` to change settings directly or `<option>`: `show` to view all settings."],
+            ["check"] = ["<>", "[red]EXPERIMENTAL[/] Should be versatile function for checking various stuff, for now at least it checks for available updates."],
             ["exit"] = ["<>", "Terminates the application."],
         };
 
